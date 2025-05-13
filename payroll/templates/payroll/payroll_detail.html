@@ -1,0 +1,200 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}Chi tiết bảng lương{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'payroll_list' %}">Bảng lương</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ payroll.name }}</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h4 class="card-title mb-0">{{ payroll.name }}</h4>
+
+                {% if payroll.status == 'disabled' %}
+                <div class="badge bg-danger p-2 fs-6">
+                    <i class="bi bi-slash-circle me-1"></i>Đã vô hiệu hóa
+                </div>
+                {% endif %}
+
+                <div class="btn-group">
+                    {% if is_admin or payroll.status == 'draft' %}
+                    <a href="{% url 'payroll_update' pk=payroll.pk %}" class="btn btn-primary">
+                        <i class="bi bi-pencil me-1"></i>Cập nhật
+                    </a>
+                    {% endif %}
+
+                    {% if is_admin or payroll.status == 'draft' %}
+                    <a href="{% url 'approve_payroll' pk=payroll.pk %}" class="btn btn-success">
+                        <i class="bi bi-check-circle me-1"></i>Duyệt
+                    </a>
+                    {% endif %}
+
+                    {% if is_admin or payroll.status == 'approved' %}
+                    <a href="{% url 'mark_as_paid' pk=payroll.pk %}" class="btn btn-success">
+                        <i class="bi bi-cash-coin me-1"></i>Đánh dấu đã thanh toán
+                    </a>
+                    {% endif %}
+
+                    {% if is_admin or (payroll.status != 'disabled' and payroll.status != 'paid') %}
+                    <a href="{% url 'disable_payroll' pk=payroll.pk %}" class="btn btn-warning">
+                        <i class="bi bi-slash-circle me-1"></i>Vô hiệu hóa
+                    </a>
+                    {% elif is_admin or payroll.status == 'disabled' %}
+                    <a href="{% url 'activate_payroll' pk=payroll.pk %}" class="btn btn-success">
+                        <i class="bi bi-check-circle me-1"></i>Kích hoạt
+                    </a>
+                    {% endif %}
+
+                    <a href="{% url 'export_payroll_excel' pk=payroll.pk %}" class="btn btn-info">
+                        <i class="bi bi-file-earmark-excel me-1"></i>Xuất Excel
+                    </a>
+
+                    {% if is_admin %}
+                    <a href="{% url 'payroll_delete' pk=payroll.pk %}" class="btn btn-danger">
+                        <i class="bi bi-trash me-1"></i>Xóa
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <table class="table">
+                        <tr>
+                            <th style="width: 150px;">Tháng/Năm:</th>
+                            <td>{{ payroll.month }}/{{ payroll.year }}</td>
+                        </tr>
+                        <tr>
+                            <th>Vị trí:</th>
+                            <td>{{ payroll.position.name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Trạng thái:</th>
+                            <td>
+                                {% if payroll.status == 'draft' %}
+                                <span class="badge bg-secondary">Nháp</span>
+                                {% elif payroll.status == 'processing' %}
+                                <span class="badge bg-info">Đang xử lý</span>
+                                {% elif payroll.status == 'approved' %}
+                                <span class="badge bg-success">Đã duyệt</span>
+                                {% elif payroll.status == 'paid' %}
+                                <span class="badge bg-primary">Đã thanh toán</span>
+                                {% elif payroll.status == 'disabled' %}
+                                <span class="badge bg-danger">Đã vô hiệu hóa</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <table class="table">
+                        <tr>
+                            <th style="width: 150px;">Ngày tạo:</th>
+                            <td>{{ payroll.created_at|date:"d/m/Y H:i" }}</td>
+                        </tr>
+                        <tr>
+                            <th>Người tạo:</th>
+                            <td>{{ payroll.created_by.get_full_name|default:payroll.created_by.username }}</td>
+                        </tr>
+                        <tr>
+                            <th>Ghi chú:</th>
+                            <td>{{ payroll.note|default:"Không có" }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            {% if payroll.status == 'disabled' %}
+            <div class="alert alert-danger mt-3">
+                <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                <strong>Lưu ý:</strong> Bảng lương này đã bị vô hiệu hóa và không thể sử dụng. Bạn có thể kích hoạt lại nếu cần thiết.
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title mb-3">Chi tiết lương nhân viên</h5>
+
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th>STT</th>
+                            <th>Họ tên</th>
+                            <th>Lương cơ bản</th>
+                            <th>Công chuẩn</th>
+                            <th>Công thực tế</th>
+                            <th>Tỷ lệ hưởng</th>
+                            <th>Tổng thu nhập</th>
+                            <th>Thuế TNCN</th>
+                            <th>Kỷ luật</th>
+                            <th>Khen thưởng</th>
+                            <th>Khấu trừ khác</th>
+                            <th>Thực lĩnh</th>
+                            <th class="text-center">Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for detail in details %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ detail.employee.full_name }}</td>
+                            <td>{{ detail.basic_salary|floatformat:0|intcomma }} VNĐ</td>
+                            <td>{{ detail.standard_workdays }}</td>
+                            <td>{{ detail.actual_workdays }}</td>
+                            <td>{{ detail.attendance_ratio|floatformat:2 }}</td>
+                            <td>{{ detail.gross_salary|floatformat:0|intcomma }} VNĐ</td>
+                            <td>{{ detail.income_tax|floatformat:0|intcomma }} VNĐ</td>
+                            <td>{{ detail.discipline_amount|floatformat:0|intcomma }} VNĐ</td>
+                            <td>{{ detail.reward_amount|floatformat:0|intcomma }} VNĐ</td>
+                            <td>{{ detail.deduction_amount|floatformat:0|intcomma }} VNĐ</td>
+                            <td>{{ detail.net_salary|floatformat:0|intcomma }} VNĐ</td>
+                            <td class="text-center">
+                                <a href="{% url 'payroll_employee_detail' payroll_id=payroll.pk detail_id=detail.pk %}" class="btn btn-sm btn-info">
+                                    <i class="bi bi-eye"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="13" class="text-center py-4">
+                                <div class="text-muted">
+                                    <i class="bi bi-inbox fs-1 d-block mb-2"></i>
+                                    Không có dữ liệu chi tiết lương
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+                        <tr class="table-light fw-bold">
+                            <td colspan="6" class="text-end">Tổng cộng:</td>
+                            <td>{{ details.aggregate.sum_gross_salary|default:0|floatformat:0|intcomma }} VNĐ</td>
+                            <td>{{ details.aggregate.sum_income_tax|default:0|floatformat:0|intcomma }} VNĐ</td>
+                            <td>{{ details.aggregate.sum_discipline|default:0|floatformat:0|intcomma }} VNĐ</td>
+                            <td>{{ details.aggregate.sum_reward|default:0|floatformat:0|intcomma }} VNĐ</td>
+                            <td>{{ details.aggregate.sum_deduction|default:0|floatformat:0|intcomma }} VNĐ</td>
+                            <td>{{ details.aggregate.sum_net_salary|default:0|floatformat:0|intcomma }} VNĐ</td>
+                            <td></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

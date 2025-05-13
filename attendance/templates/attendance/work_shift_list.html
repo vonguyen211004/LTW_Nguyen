@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+
+{% block title %}
+ - Ms.Vy English
+{% endblock %}
+
+{% block module_sidebar %}
+<ul class="nav flex-column">
+    <li class="nav-item">
+        <a class="nav-link {% if 'work-shifts' in request.path %}active{% endif %}" href="{% url 'work_shift_list' %}">
+            <i class="bi bi-calendar-check me-2"></i> Ca làm việc
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link {% if request.path == '/attendance-details/' %}active{% endif %}" href="{% url 'attendance_detail_list' %}">
+            <i class="bi bi-list-check me-2"></i> Bảng chấm công chi tiết
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link {% if request.path == '/attendance-summary/' %}active{% endif %}" href="{% url 'attendance_summary' %}">
+            <i class="bi bi-bar-chart me-2"></i> Bảng chấm công tổng hợp
+        </a>
+    </li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h2 class="text-center fw-bold">Quản lý Chấm công</h2>
+    <a href="{% url 'work_shift_form' %}" class="btn btn-primary">
+        <i class="bi bi-plus-circle me-1"></i> Thêm ca làm việc
+    </a>
+</div>
+
+<!-- Bộ lọc -->
+<div class="d-flex gap-3 mb-3 align-items-center">
+    <input type="text" class="form-control" placeholder="Tìm kiếm theo mã ca hoặc tên ca..." style="max-width: 300px;" id="searchInput">
+    <button class="btn btn-primary" type="submit">
+                        <i class="bi bi-search"></i>
+    </button>
+</div>
+
+<div class="card">
+    <div class="card-body p-0">
+        <table class="table table-hover mb-0" id="workShiftTable">
+            <thead>
+                <tr>
+                    <th>Tên ca</th>
+                    <th>Mã ca</th>
+                    <th>Giờ bắt đầu ca</th>
+                    <th>Giờ kết thúc ca</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for shift in work_shifts %}
+                <tr>
+                    <td>{{ shift.name }}</td>
+                    <td>{{ shift.code }}</td>
+                    <td>{{ shift.start_time }}</td>
+                    <td>{{ shift.end_time }}</td>
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn btn-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-three-dots"></i>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{% url 'work_shift_form' shift.id %}"><i class="bi bi-pencil me-2"></i> Sửa</a></li>
+                                <li><a class="dropdown-item" href="{% url 'work_shift_detail' shift.id %}"><i class="bi bi-eye me-2"></i> Xem chi tiết</a></li>
+                                <li><a class="dropdown-item text-danger" href="{% url 'work_shift_delete' shift.id %}" onclick="return confirm('Bạn có chắc chắn muốn xóa ca làm việc này không?');"><i class="bi bi-trash me-2"></i> Xóa</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="text-center text-muted">Chưa có ca làm việc nào.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="mt-3">
+    <p>Tổng số bản ghi: {{ work_shifts|length }}</p>
+    <p>Từ 1 đến {{ work_shifts|length }} bản ghi</p>
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            <li class="page-item disabled"><a class="page-link" href="#">1 / 1</a></li>
+        </ul>
+    </nav>
+</div>
+
+<script>
+function filterTable() {
+    const searchInput = document.getElementById('searchInput').value.toLowerCase();
+    const rows = document.querySelectorAll('#workShiftTable tbody tr');
+
+    rows.forEach(row => {
+        const name = row.cells[0].innerText.toLowerCase();
+        const code = row.cells[1].innerText.toLowerCase();
+
+        if (name.includes(searchInput) || code.includes(searchInput)) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
+    });
+}
+</script>
+{% endblock %}

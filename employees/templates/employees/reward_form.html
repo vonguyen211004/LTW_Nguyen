@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'employee_list' %}">Nhân viên</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'employee_detail' pk=employee.id %}">{{ employee.full_name }}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ title }}</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h4 class="card-title mb-4">{{ title }}</h4>
+            
+            <form method="post">
+                {% csrf_token %}
+                
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="id_date" class="form-label">Ngày <span class="text-danger">*</span></label>
+                        <input type="date" name="date" id="id_date" class="form-control {% if form.date.errors %}is-invalid{% endif %}" value="{{ form.date.value|date:'Y-m-d'|default:'' }}" required>
+                        {% if form.date.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.date.errors %}{{ error }}{% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="id_reward_type" class="form-label">Loại khen thưởng <span class="text-danger">*</span></label>
+                        <select name="reward_type" id="id_reward_type" class="form-select {% if form.reward_type.errors %}is-invalid{% endif %}" required>
+                            <option value="">-- Chọn loại khen thưởng --</option>
+                            {% for value, text in form.fields.reward_type.choices %}
+                            <option value="{{ value }}" {% if form.reward_type.value == value %}selected{% endif %}>{{ text }}</option>
+                            {% endfor %}
+                        </select>
+                        {% if form.reward_type.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.reward_type.errors %}{{ error }}{% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="id_amount" class="form-label">Số tiền <span class="text-danger">*</span></label>
+                        <div class="input-group">
+                            <input type="number" name="amount" id="id_amount" class="form-control {% if form.amount.errors %}is-invalid{% endif %}" value="{{ form.amount.value|default:'' }}" required>
+                            <span class="input-group-text">VNĐ</span>
+                            {% if form.amount.errors %}
+                            <div class="invalid-feedback">
+                                {% for error in form.amount.errors %}{{ error }}{% endfor %}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <label for="id_note" class="form-label">Ghi chú</label>
+                        <textarea name="note" id="id_note" rows="3" class="form-control {% if form.note.errors %}is-invalid{% endif %}">{{ form.note.value|default:'' }}</textarea>
+                        {% if form.note.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.note.errors %}{{ error }}{% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <div class="d-flex justify-content-end mt-4">
+                    <a href="{% url 'employee_detail' pk=employee.id %}" class="btn btn-outline-secondary me-2">
+                        <i class="bi bi-x-circle me-1"></i>Hủy bỏ
+                    </a>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-save me-1"></i>{% if reward %}Cập nhật{% else %}Lưu{% endif %}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

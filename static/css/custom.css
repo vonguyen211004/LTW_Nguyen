@@ -1,0 +1,67 @@
+/* Custom styles for specific components */
+
+/* Dashboard cards */
+.dashboard-card {
+    transition: transform 0.3s;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Employee profile */
+.employee-photo {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 5px solid #fff;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+/* Form styling */
+.form-label {
+    font-weight: 500;
+}
+
+/* Table styling */
+.table-hover tbody tr:hover {
+    background-color: rgba(13, 110, 253, 0.05);
+}
+
+/* Badge styling */
+.badge.bg-success {
+    background-color: #198754 !important;
+}
+
+.badge.bg-danger {
+    background-color: #dc3545 !important;
+}
+
+.badge.bg-warning {
+    background-color: #ffc107 !important;
+    color: #212529;
+}
+
+.badge.bg-info {
+    background-color: #0dcaf0 !important;
+    color: #212529;
+}
+
+/* Print styles */
+@media print {
+    .sidebar, .navbar, .btn, .no-print {
+        display: none !important;
+    }
+
+    .container-fluid {
+        width: 100%;
+        padding: 0;
+    }
+
+    .col-md-9 {
+        width: 100%;
+        max-width: 100%;
+        flex: 0 0 100%;
+    }
+}

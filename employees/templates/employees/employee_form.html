@@ -1,0 +1,307 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{% if employee %}Cập nhật nhân viên{% else %}Thêm nhân viên mới{% endif %}{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'employee_list' %}">Nhân viên</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{% if employee %}Cập nhật{% else %}Thêm mới{% endif %}</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h4 class="card-title mb-4">{% if employee %}Cập nhật nhân viên{% else %}Thêm nhân viên mới{% endif %}</h4>
+
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="row">
+                    <div class="col-md-12 mb-4">
+                        <h5>Thông tin cơ bản</h5>
+                        <hr>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label for="id_code" class="form-label">Mã nhân viên <span class="text-danger">*</span></label>
+                        <input type="text" name="code" id="id_code" class="form-control {% if form.code.errors %}is-invalid{% endif %}" value="{{ form.code.value|default:'' }}" required>
+                        {% if form.code.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.code.errors %}{{ error }}{% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="id_last_name" class="form-label">Họ <span class="text-danger">*</span></label>
+                        <input type="text" name="last_name" id="id_last_name" class="form-control {% if form.last_name.errors %}is-invalid{% endif %}" value="{{ form.last_name.value|default:'' }}" required>
+                        {% if form.last_name.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.last_name.errors %}{{ error }}{% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="id_first_name" class="form-label">Tên <span class="text-danger">*</span></label>
+                        <input type="text" name="first_name" id="id_first_name" class="form-control {% if form.first_name.errors %}is-invalid{% endif %}" value="{{ form.first_name.value|default:'' }}" required>
+                        {% if form.first_name.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.first_name.errors %}{{ error }}{% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label for="id_gender" class="form-label">Giới tính <span class="text-danger">*</span></label>
+                        <select name="gender" id="id_gender" class="form-select {% if form.gender.errors %}is-invalid{% endif %}" required>
+                            <option value="">-- Chọn giới tính --</option>
+                            {% for value, text in form.fields.gender.choices %}
+                            <option value="{{ value }}" {% if form.gender.value == value %}selected{% endif %}>{{ text }}</option>
+                            {% endfor %}
+                        </select>
+                        {% if form.gender.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.gender.errors %}{{ error }}{% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="id_date_of_birth" class="form-label">Ngày sinh <span class="text-danger">*</span></label>
+                        <input type="date" name="date_of_birth" id="id_date_of_birth" class="form-control {% if form.date_of_birth.errors %}is-invalid{% endif %}" value="{{ form.date_of_birth.value|date:'Y-m-d'|default:'' }}" required>
+                        {% if form.date_of_birth.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.date_of_birth.errors %}{{ error }}{% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="id_id_number" class="form-label">Số CMND/CCCD</label>
+                        <input type="text" name="id_number" id="id_id_number" class="form-control {% if form.id_number.errors %}is-invalid{% endif %}" value="{{ form.id_number.value|default:'' }}">
+                        {% if form.id_number.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.id_number.errors %}{{ error }}{% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 mb-4 mt-3">
+                        <h5>Thông tin liên hệ</h5>
+                        <hr>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label for="id_phone" class="form-label">Số điện thoại <span class="text-danger">*</span></label>
+                        <input type="tel" name="phone" id="id_phone" class="form-control {% if form.phone.errors %}is-invalid{% endif %}" value="{{ form.phone.value|default:'' }}" required>
+                        {% if form.phone.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.phone.errors %}{{ error }}{% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="id_email" class="form-label">Email</label>
+                        <input type="email" name="email" id="id_email" class="form-control {% if form.email.errors %}is-invalid{% endif %}" value="{{ form.email.value|default:'' }}">
+                        {% if form.email.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}{{ error }}{% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="id_address" class="form-label">Địa chỉ</label>
+                        <input type="text" name="address" id="id_address" class="form-control {% if form.address.errors %}is-invalid{% endif %}" value="{{ form.address.value|default:'' }}">
+                        {% if form.address.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.address.errors %}{{ error }}{% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 mb-4 mt-3">
+                        <h5>Thông tin công việc</h5>
+                        <hr>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label for="id_position" class="form-label">Vị trí công việc <span class="text-danger">*</span></label>
+                        <select name="position" id="id_position" class="form-select {% if form.position.errors %}is-invalid{% endif %}" required>
+                            <option value="">-- Chọn vị trí --</option>
+                            {% for position in positions %}
+                            <option value="{{ position.id }}" {% if form.position.value|stringformat:"i" == position.id|stringformat:"i" %}selected{% endif %}>{{ position.name }}</option>
+                            {% endfor %}
+                        </select>
+                        {% if form.position.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.position.errors %}{{ error }}{% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="id_join_date" class="form-label">Ngày vào làm <span class="text-danger">*</span></label>
+                        <input type="date" name="join_date" id="id_join_date" class="form-control {% if form.join_date.errors %}is-invalid{% endif %}" value="{{ form.join_date.value|date:'Y-m-d'|default:'' }}" required>
+                        {% if form.join_date.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.join_date.errors %}{{ error }}{% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="id_is_active" class="form-label">Trạng thái</label>
+                        <div class="form-check form-switch mt-2">
+                            <input class="form-check-input" type="checkbox" name="is_active" id="id_is_active" {% if form.is_active.value %}checked{% endif %}>
+                            <label class="form-check-label" for="id_is_active">Đang làm việc</label>
+                        </div>
+                        {% if form.is_active.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.is_active.errors %}{{ error }}{% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 mb-4 mt-3">
+                        <h5>Thông tin học vấn</h5>
+                        <hr>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label for="id_education_level" class="form-label">Trình độ học vấn</label>
+                        <select name="education_level" id="id_education_level" class="form-select {% if form.education_level.errors %}is-invalid{% endif %}">
+                            <option value="">-- Chọn trình độ --</option>
+                            {% for value, text in form.fields.education_level.choices %}
+                            <option value="{{ value }}" {% if form.education_level.value == value %}selected{% endif %}>{{ text }}</option>
+                            {% endfor %}
+                        </select>
+                        {% if form.education_level.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.education_level.errors %}{{ error }}{% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="id_degree" class="form-label">Bằng cấp</label>
+                        <input type="text" name="degree" id="id_degree" class="form-control {% if form.degree.errors %}is-invalid{% endif %}" value="{{ form.degree.value|default:'' }}">
+                        {% if form.degree.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.degree.errors %}{{ error }}{% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="id_major" class="form-label">Chuyên ngành</label>
+                        <input type="text" name="major" id="id_major" class="form-control {% if form.major.errors %}is-invalid{% endif %}" value="{{ form.major.value|default:'' }}">
+                        {% if form.major.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.major.errors %}{{ error }}{% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 mb-4 mt-3">
+                        <h5>Thông tin lương</h5>
+                        <hr>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label for="id_basic_salary" class="form-label">Lương cơ bản</label>
+                        <input type="number" name="basic_salary" id="id_basic_salary" class="form-control {% if form.basic_salary.errors %}is-invalid{% endif %}" value="{{ form.basic_salary.value|default:'' }}">
+                        {% if form.basic_salary.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.basic_salary.errors %}{{ error }}{% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="id_photo" class="form-label">Ảnh đại diện</label>
+                        <input type="file" name="photo" id="id_photo" class="form-control {% if form.photo.errors %}is-invalid{% endif %}">
+                        {% if form.photo.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.photo.errors %}{{ error }}{% endfor %}
+                        </div>
+                        {% endif %}
+                        {% if employee.photo %}
+                        <div class="mt-2">
+                            <img src="{{ employee.photo.url }}" alt="{{ employee.full_name }}" class="img-thumbnail" style="height: 100px;">
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 mb-4 mt-3">
+                        <h5>Thông tin thuế</h5>
+                        <hr>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label for="id_tax_code" class="form-label">Mã số thuế</label>
+                        <input type="text" name="tax_code" id="id_tax_code" class="form-control {% if form.tax_code.errors %}is-invalid{% endif %}" value="{{ form.tax_code.value|default:'' }}">
+                        {% if form.tax_code.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.tax_code.errors %}{{ error }}{% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="id_dependents" class="form-label">Số người phụ thuộc</label>
+                        <input type="number" name="dependents" id="id_dependents" class="form-control {% if form.dependents.errors %}is-invalid{% endif %}" value="{{ form.dependents.value|default:'0' }}" min="0">
+                        {% if form.dependents.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.dependents.errors %}{{ error }}{% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="id_tax_exemption" class="form-label">Miễn thuế</label>
+                        <div class="form-check form-switch mt-2">
+                            <input class="form-check-input" type="checkbox" name="tax_exemption" id="id_tax_exemption" {% if form.tax_exemption.value %}checked{% endif %}>
+                            <label class="form-check-label" for="id_tax_exemption">Được miễn thuế TNCN</label>
+                        </div>
+                        {% if form.tax_exemption.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.tax_exemption.errors %}{{ error }}{% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-end mt-4">
+                    <a href="{% url 'employee_list' %}" class="btn btn-outline-secondary me-2">
+                        <i class="bi bi-x-circle me-1"></i>Hủy bỏ
+                    </a>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-save me-1"></i>{% if employee %}Cập nhật{% else %}Lưu{% endif %}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

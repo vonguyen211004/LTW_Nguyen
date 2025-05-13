@@ -1,0 +1,500 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}Chi tiết nhân viên{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'employee_list' %}">Nhân viên</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ employee.full_name }}</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body text-center">
+                    {% if employee.photo %}
+                    <img src="{{ employee.photo.url }}" alt="{{ employee.full_name }}" class="rounded-circle img-thumbnail mb-3" style="width: 150px; height: 150px; object-fit: cover;">
+                    {% else %}
+                    <div class="rounded-circle bg-light d-flex align-items-center justify-content-center mx-auto mb-3" style="width: 150px; height: 150px;">
+                        <i class="bi bi-person-fill text-secondary" style="font-size: 4rem;"></i>
+                    </div>
+                    {% endif %}
+                    <h4 class="card-title">{{ employee.full_name }}</h4>
+                    <p class="text-muted">{{ employee.position.name }}</p>
+                    <div class="d-flex justify-content-center gap-2 mb-3">
+                        <a href="{% url 'employee_update' pk=employee.pk %}" class="btn btn-primary">
+                            <i class="bi bi-pencil me-1"></i>Chỉnh sửa
+                        </a>
+                        <a href="{% url 'employee_delete' pk=employee.pk %}" class="btn btn-danger">
+                            <i class="bi bi-trash me-1"></i>Xóa
+                        </a>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        {% if employee.is_active %}
+                        <span class="badge bg-success p-2">Đang làm việc</span>
+                        {% else %}
+                        <span class="badge bg-danger p-2">Đã nghỉ việc</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs" id="employeeTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="info-tab" data-bs-toggle="tab" data-bs-target="#info" type="button" role="tab" aria-controls="info" aria-selected="true">
+                                <i class="bi bi-person me-1"></i>Thông tin cơ bản
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="salary-tab" data-bs-toggle="tab" data-bs-target="#salary" type="button" role="tab" aria-controls="salary" aria-selected="false">
+                                <i class="bi bi-cash-coin me-1"></i>Lương & Thuế
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="dependents-tab" data-bs-toggle="tab" data-bs-target="#dependents" type="button" role="tab" aria-controls="dependents" aria-selected="false">
+                                <i class="bi bi-people me-1"></i>Người phụ thuộc
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="discipline-tab" data-bs-toggle="tab" data-bs-target="#discipline" type="button" role="tab" aria-controls="discipline" aria-selected="false">
+                                <i class="bi bi-exclamation-triangle me-1"></i>Kỷ luật
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="reward-tab" data-bs-toggle="tab" data-bs-target="#reward" type="button" role="tab" aria-controls="reward" aria-selected="false">
+                                <i class="bi bi-trophy me-1"></i>Khen thưởng
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content" id="employeeTabContent">
+                        <!-- Thông tin cơ bản -->
+                        <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info-tab">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 class="mb-3">Thông tin cá nhân</h5>
+                                    <table class="table">
+                                        <tr>
+                                            <th style="width: 150px;">Mã nhân viên:</th>
+                                            <td>{{ employee.code }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Họ và tên:</th>
+                                            <td>{{ employee.full_name }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Giới tính:</th>
+                                            <td>{{ employee.get_gender_display }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Ngày sinh:</th>
+                                            <td>{{ employee.date_of_birth|date:"d/m/Y" }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>CMND/CCCD:</th>
+                                            <td>{{ employee.id_number|default:"Chưa cập nhật" }}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5 class="mb-3">Thông tin liên hệ</h5>
+                                    <table class="table">
+                                        <tr>
+                                            <th style="width: 150px;">Số điện thoại:</th>
+                                            <td>{{ employee.phone }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Email:</th>
+                                            <td>{{ employee.email|default:"Chưa cập nhật" }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Địa chỉ:</th>
+                                            <td>{{ employee.address|default:"Chưa cập nhật" }}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col-md-6">
+                                    <h5 class="mb-3">Thông tin công việc</h5>
+                                    <table class="table">
+                                        <tr>
+                                            <th style="width: 150px;">Vị trí:</th>
+                                            <td>{{ employee.position.name }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Ngày vào làm:</th>
+                                            <td>{{ employee.join_date|date:"d/m/Y" }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Trạng thái:</th>
+                                            <td>
+                                                {% if employee.is_active %}
+                                                <span class="badge bg-success">Đang làm việc</span>
+                                                {% else %}
+                                                <span class="badge bg-danger">Đã nghỉ việc</span>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5 class="mb-3">Thông tin học vấn</h5>
+                                    <table class="table">
+                                        <tr>
+                                            <th style="width: 150px;">Trình độ:</th>
+                                            <td>{{ employee.get_education_level_display|default:"Chưa cập nhật" }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Bằng cấp:</th>
+                                            <td>{{ employee.degree|default:"Chưa cập nhật" }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Chuyên ngành:</th>
+                                            <td>{{ employee.major|default:"Chưa cập nhật" }}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Lương & Thuế -->
+                        <div class="tab-pane fade" id="salary" role="tabpanel" aria-labelledby="salary-tab">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 class="mb-3">Thông tin lương</h5>
+                                    <table class="table">
+                                        <tr>
+                                            <th style="width: 150px;">Lương cơ bản:</th>
+                                            <td>{{ employee.basic_salary|intcomma }} VNĐ</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5 class="mb-3">Thông tin thuế</h5>
+                                    <table class="table">
+                                        <tr>
+                                            <th style="width: 150px;">Mã số thuế:</th>
+                                            <td>{{ employee.tax_code|default:"Chưa cập nhật" }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Miễn thuế:</th>
+                                            <td>
+                                                {% if employee.tax_exemption %}
+                                                <span class="badge bg-success">Có</span>
+                                                {% else %}
+                                                <span class="badge bg-secondary">Không</span>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Số người phụ thuộc:</th>
+                                            <td>{{ employee.dependents }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Giảm trừ gia cảnh:</th>
+                                            <td>{{ employee.calculate_total_deduction|intcomma }} VNĐ</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="row mt-4">
+                                <div class="col-12">
+                                    <h5 class="mb-3">Mô phỏng tính thuế TNCN</h5>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <form id="taxSimulationForm" class="mb-4">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="mb-3">
+                                                            <label for="grossIncome" class="form-label">Tổng thu nhập:</label>
+                                                            <input type="number" class="form-control" id="grossIncome" value="{{ employee.basic_salary }}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 d-flex align-items-end">
+                                                        <button type="button" id="calculateTaxBtn" class="btn btn-primary">
+                                                            <i class="bi bi-calculator me-1"></i>Tính thuế
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+
+                                            <div id="taxResult" style="display: none;">
+                                                <h6>Kết quả tính thuế:</h6>
+                                                <table class="table table-bordered">
+                                                    <tr>
+                                                        <th>Tổng thu nhập:</th>
+                                                        <td id="resultGrossIncome"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Giảm trừ gia cảnh bản thân:</th>
+                                                        <td>{{ employee.calculate_personal_deduction|intcomma }} VNĐ</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Giảm trừ người phụ thuộc:</th>
+                                                        <td>{{ employee.calculate_dependent_deduction|intcomma }} VNĐ</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Thu nhập tính thuế:</th>
+                                                        <td id="resultTaxableIncome"></td>
+                                                    </tr>
+                                                    <tr class="table-primary">
+                                                        <th>Thuế TNCN phải nộp:</th>
+                                                        <td id="resultIncomeTax"></td>
+                                                    </tr>
+                                                    <tr class="table-success">
+                                                        <th>Thực lĩnh:</th>
+                                                        <td id="resultNetSalary"></td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Người phụ thuộc -->
+                        <div class="tab-pane fade" id="dependents" role="tabpanel" aria-labelledby="dependents-tab">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h5 class="mb-0">Danh sách người phụ thuộc</h5>
+                                <a href="{% url 'dependent_create' employee_id=employee.id %}" class="btn btn-primary btn-sm">
+                                    <i class="bi bi-plus-circle me-1"></i>Thêm người phụ thuộc
+                                </a>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>STT</th>
+                                            <th>Họ và tên</th>
+                                            <th>Quan hệ</th>
+                                            <th>Ngày sinh</th>
+                                            <th>Ngày bắt đầu</th>
+                                            <th>Ngày kết thúc</th>
+                                            <th>Trạng thái</th>
+                                            <th class="text-center">Thao tác</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for dependent in employee.dependent_persons.all %}
+                                        <tr>
+                                            <td>{{ forloop.counter }}</td>
+                                            <td>{{ dependent.full_name }}</td>
+                                            <td>{{ dependent.get_relationship_display }}</td>
+                                            <td>{{ dependent.date_of_birth|date:"d/m/Y" }}</td>
+                                            <td>{{ dependent.start_date|date:"d/m/Y" }}</td>
+                                            <td>{{ dependent.end_date|date:"d/m/Y"|default:"--" }}</td>
+                                            <td>
+                                                {% if dependent.is_active %}
+                                                <span class="badge bg-success">Đang áp dụng</span>
+                                                {% else %}
+                                                <span class="badge bg-secondary">Không áp dụng</span>
+                                                {% endif %}
+                                            </td>
+                                            <td class="text-center">
+                                                <div class="btn-group">
+                                                    <a href="{% url 'dependent_update' pk=dependent.pk %}" class="btn btn-sm btn-primary">
+                                                        <i class="bi bi-pencil"></i>
+                                                    </a>
+                                                    <a href="{% url 'dependent_delete' pk=dependent.pk %}" class="btn btn-sm btn-danger">
+                                                        <i class="bi bi-trash"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        {% empty %}
+                                        <tr>
+                                            <td colspan="8" class="text-center py-4">
+                                                <div class="text-muted">
+                                                    <i class="bi bi-people fs-1 d-block mb-2"></i>
+                                                    Không có người phụ thuộc
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Kỷ luật -->
+                        <div class="tab-pane fade" id="discipline" role="tabpanel" aria-labelledby="discipline-tab">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h5 class="mb-0">Lịch sử kỷ luật</h5>
+                                <a href="{% url 'discipline_create' employee_id=employee.id %}" class="btn btn-primary btn-sm">
+                                    <i class="bi bi-plus-circle me-1"></i>Thêm kỷ luật
+                                </a>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>STT</th>
+                                            <th>Ngày</th>
+                                            <th>Loại kỷ luật</th>
+                                            <th>Số tiền</th>
+                                            <th>Ghi chú</th>
+                                            <th>Người tạo</th>
+                                            <th class="text-center">Thao tác</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for discipline in employee.disciplines.all %}
+                                        <tr>
+                                            <td>{{ forloop.counter }}</td>
+                                            <td>{{ discipline.date|date:"d/m/Y" }}</td>
+                                            <td>{{ discipline.get_discipline_type_display }}</td>
+                                            <td>{{ discipline.amount|intcomma }} VNĐ</td>
+                                            <td>{{ discipline.note|truncatechars:50|default:"--" }}</td>
+                                            <td>{{ discipline.created_by.get_full_name|default:discipline.created_by.username }}</td>
+                                            <td class="text-center">
+                                                <div class="btn-group">
+                                                    <a href="{% url 'discipline_update' pk=discipline.pk %}" class="btn btn-sm btn-primary">
+                                                        <i class="bi bi-pencil"></i>
+                                                    </a>
+                                                    <a href="{% url 'discipline_delete' pk=discipline.pk %}" class="btn btn-sm btn-danger">
+                                                        <i class="bi bi-trash"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        {% empty %}
+                                        <tr>
+                                            <td colspan="7" class="text-center py-4">
+                                                <div class="text-muted">
+                                                    <i class="bi bi-exclamation-triangle fs-1 d-block mb-2"></i>
+                                                    Không có lịch sử kỷ luật
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Khen thưởng -->
+                        <div class="tab-pane fade" id="reward" role="tabpanel" aria-labelledby="reward-tab">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h5 class="mb-0">Lịch sử khen thưởng</h5>
+                                <a href="{% url 'reward_create' employee_id=employee.id %}" class="btn btn-primary btn-sm">
+                                    <i class="bi bi-plus-circle me-1"></i>Thêm khen thưởng
+                                </a>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>STT</th>
+                                            <th>Ngày</th>
+                                            <th>Loại khen thưởng</th>
+                                            <th>Số tiền</th>
+                                            <th>Ghi chú</th>
+                                            <th>Người tạo</th>
+                                            <th class="text-center">Thao tác</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for reward in employee.rewards.all %}
+                                        <tr>
+                                            <td>{{ forloop.counter }}</td>
+                                            <td>{{ reward.date|date:"d/m/Y" }}</td>
+                                            <td>{{ reward.get_reward_type_display }}</td>
+                                            <td>{{ reward.amount|intcomma }} VNĐ</td>
+                                            <td>{{ reward.note|truncatechars:50|default:"--" }}</td>
+                                            <td>{{ reward.created_by.get_full_name|default:reward.created_by.username }}</td>
+                                            <td class="text-center">
+                                                <div class="btn-group">
+                                                    <a href="{% url 'reward_update' pk=reward.pk %}" class="btn btn-sm btn-primary">
+                                                        <i class="bi bi-pencil"></i>
+                                                    </a>
+                                                    <a href="{% url 'reward_delete' pk=reward.pk %}" class="btn btn-sm btn-danger">
+                                                        <i class="bi bi-trash"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        {% empty %}
+                                        <tr>
+                                            <td colspan="7" class="text-center py-4">
+                                                <div class="text-muted">
+                                                    <i class="bi bi-trophy fs-1 d-block mb-2"></i>
+                                                    Không có lịch sử khen thưởng
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const calculateTaxBtn = document.getElementById('calculateTaxBtn');
+        const taxResult = document.getElementById('taxResult');
+        const resultGrossIncome = document.getElementById('resultGrossIncome');
+        const resultTaxableIncome = document.getElementById('resultTaxableIncome');
+        const resultIncomeTax = document.getElementById('resultIncomeTax');
+        const resultNetSalary = document.getElementById('resultNetSalary');
+
+        calculateTaxBtn.addEventListener('click', function() {
+            const grossIncome = parseFloat(document.getElementById('grossIncome').value) || 0;
+
+            // Gọi API để tính thuế
+            fetch(`/api/calculate-tax/${employee.id}/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                body: JSON.stringify({
+                    gross_income: grossIncome
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Hiển thị kết quả
+                resultGrossIncome.textContent = new Intl.NumberFormat('vi-VN').format(data.gross_income) + ' VNĐ';
+                resultTaxableIncome.textContent = new Intl.NumberFormat('vi-VN').format(data.taxable_income) + ' VNĐ';
+                resultIncomeTax.textContent = new Intl.NumberFormat('vi-VN').format(data.income_tax) + ' VNĐ';
+                resultNetSalary.textContent = new Intl.NumberFormat('vi-VN').format(data.net_salary) + ' VNĐ';
+
+                // Hiển thị kết quả
+                taxResult.style.display = 'block';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Có lỗi xảy ra khi tính thuế. Vui lòng thử lại sau.');
+            });
+        });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,1195 @@
+INFO 2025-05-13 20:29:46,502 autoreload Watching for file changes with StatReloader
+INFO 2025-05-13 20:29:49,284 basehttp "GET / HTTP/1.1" 200 13143
+INFO 2025-05-13 20:29:51,062 basehttp "GET /attendance/ HTTP/1.1" 302 0
+INFO 2025-05-13 20:29:51,105 basehttp "GET /attendance/work-shifts/ HTTP/1.1" 200 12531
+INFO 2025-05-13 20:29:51,889 basehttp "GET /attendance/attendance-summary/ HTTP/1.1" 200 14667
+INFO 2025-05-13 20:29:53,709 basehttp "GET /attendance/attendance-summary/1/ HTTP/1.1" 200 12908
+WARNING 2025-05-13 20:29:53,752 basehttp "GET /static/js/attendance.js HTTP/1.1" 404 1807
+INFO 2025-05-13 20:29:58,349 basehttp "GET /attendance/attendance-summary/1/ HTTP/1.1" 200 12908
+WARNING 2025-05-13 20:29:58,409 basehttp "GET /static/js/attendance.js HTTP/1.1" 404 1807
+INFO 2025-05-13 20:30:10,949 basehttp "GET /attendance/attendance-details/ HTTP/1.1" 200 13024
+INFO 2025-05-13 20:30:11,917 basehttp "GET /attendance/attendance-details/view/1/ HTTP/1.1" 200 48266
+INFO 2025-05-13 20:30:13,816 basehttp "GET /attendance/attendance-summary/ HTTP/1.1" 200 14667
+INFO 2025-05-13 20:30:15,256 basehttp "GET /attendance/attendance-summary/1/ HTTP/1.1" 200 12908
+WARNING 2025-05-13 20:30:15,306 basehttp "GET /static/js/attendance.js HTTP/1.1" 404 1807
+INFO 2025-05-13 20:30:21,152 basehttp "GET /tien-luong/ HTTP/1.1" 200 12515
+ERROR 2025-05-13 20:30:50,317 log Internal Server Error: /tien-luong/1/activate/
+Traceback (most recent call last):
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "D:\HK22425\HocKhac\btcd4\hr_management\payroll\views.py", line 659, in activate_payroll
+    return render(request, 'payroll/payroll_activate.html', context)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: payroll/payroll_activate.html
+ERROR 2025-05-13 20:30:50,322 basehttp "GET /tien-luong/1/activate/ HTTP/1.1" 500 89062
+INFO 2025-05-13 20:30:59,639 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 14090
+ERROR 2025-05-13 20:31:00,571 log Internal Server Error: /tien-luong/1/activate/
+Traceback (most recent call last):
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "D:\HK22425\HocKhac\btcd4\hr_management\payroll\views.py", line 659, in activate_payroll
+    return render(request, 'payroll/payroll_activate.html', context)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: payroll/payroll_activate.html
+ERROR 2025-05-13 20:31:00,574 basehttp "GET /tien-luong/1/activate/ HTTP/1.1" 500 89064
+ERROR 2025-05-13 20:31:05,351 log Internal Server Error: /tien-luong/1/activate/
+Traceback (most recent call last):
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "D:\HK22425\HocKhac\btcd4\hr_management\payroll\views.py", line 659, in activate_payroll
+    return render(request, 'payroll/payroll_activate.html', context)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: payroll/payroll_activate.html
+ERROR 2025-05-13 20:31:05,354 basehttp "GET /tien-luong/1/activate/ HTTP/1.1" 500 89062
+INFO 2025-05-13 20:31:51,724 basehttp "GET /tien-luong/1/activate/ HTTP/1.1" 200 12634
+INFO 2025-05-13 20:31:54,847 basehttp "POST /tien-luong/1/activate/ HTTP/1.1" 302 0
+INFO 2025-05-13 20:31:54,870 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 14397
+INFO 2025-05-13 20:31:57,658 basehttp "GET /tien-luong/1/export/ HTTP/1.1" 200 6182
+INFO 2025-05-13 20:32:35,707 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13947
+INFO 2025-05-13 20:32:36,879 basehttp "GET /tien-luong/ HTTP/1.1" 200 12732
+INFO 2025-05-13 20:32:43,693 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13947
+INFO 2025-05-13 20:32:45,844 basehttp "GET /tien-luong/ HTTP/1.1" 200 12732
+INFO 2025-05-13 20:32:48,683 basehttp "GET /tien-luong/1/update/ HTTP/1.1" 200 15330
+INFO 2025-05-13 20:33:57,354 basehttp "GET /tien-luong/ HTTP/1.1" 200 12732
+INFO 2025-05-13 20:33:59,692 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13947
+ERROR 2025-05-13 20:34:05,642 log Internal Server Error: /tien-luong/1/approve/
+Traceback (most recent call last):
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "D:\HK22425\HocKhac\btcd4\hr_management\payroll\views.py", line 363, in approve_payroll
+    return render(request, 'payroll/payroll_approve.html', context)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: payroll/payroll_approve.html
+ERROR 2025-05-13 20:34:05,645 basehttp "GET /tien-luong/1/approve/ HTTP/1.1" 500 88979
+INFO 2025-05-13 20:36:55,879 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13947
+INFO 2025-05-13 20:36:57,514 basehttp "GET /attendance/ HTTP/1.1" 302 0
+INFO 2025-05-13 20:36:57,562 basehttp "GET /attendance/work-shifts/ HTTP/1.1" 200 12531
+INFO 2025-05-13 20:36:57,989 basehttp "GET /tien-luong/ HTTP/1.1" 200 12732
+INFO 2025-05-13 20:37:51,879 basehttp "GET /tien-luong/ HTTP/1.1" 200 12733
+INFO 2025-05-13 20:37:59,245 basehttp "GET /tien-luong/ HTTP/1.1" 200 12732
+INFO 2025-05-13 20:38:07,683 basehttp "GET /tien-luong/ HTTP/1.1" 200 12732
+INFO 2025-05-13 20:38:12,578 basehttp "GET /tien-luong/ HTTP/1.1" 200 12732
+INFO 2025-05-13 20:38:25,134 basehttp "GET /tien-luong/ HTTP/1.1" 200 12709
+INFO 2025-05-13 20:38:41,069 basehttp "GET /tien-luong/ HTTP/1.1" 200 12707
+INFO 2025-05-13 20:38:46,995 basehttp "GET /nhan-vien/ HTTP/1.1" 200 13062
+INFO 2025-05-13 20:38:47,028 basehttp "GET /media/employees/report5.png HTTP/1.1" 304 0
+INFO 2025-05-13 20:38:47,639 basehttp "GET /attendance/ HTTP/1.1" 302 0
+INFO 2025-05-13 20:38:47,660 basehttp "GET /attendance/work-shifts/ HTTP/1.1" 200 12531
+INFO 2025-05-13 20:38:48,950 basehttp "GET /tien-luong/ HTTP/1.1" 200 12707
+INFO 2025-05-13 20:38:52,236 basehttp "GET /attendance/ HTTP/1.1" 302 0
+INFO 2025-05-13 20:38:52,256 basehttp "GET /attendance/work-shifts/ HTTP/1.1" 200 12531
+INFO 2025-05-13 20:38:52,728 basehttp "GET /nhan-vien/ HTTP/1.1" 200 13062
+INFO 2025-05-13 20:38:53,341 basehttp "GET /attendance/ HTTP/1.1" 302 0
+INFO 2025-05-13 20:38:53,360 basehttp "GET /attendance/work-shifts/ HTTP/1.1" 200 12531
+INFO 2025-05-13 20:38:53,899 basehttp "GET /tien-luong/ HTTP/1.1" 200 12707
+INFO 2025-05-13 20:39:02,951 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13947
+INFO 2025-05-13 20:39:25,674 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13773
+INFO 2025-05-13 20:39:46,979 basehttp "GET /attendance/ HTTP/1.1" 302 0
+INFO 2025-05-13 20:39:46,999 basehttp "GET /attendance/work-shifts/ HTTP/1.1" 200 12531
+INFO 2025-05-13 20:39:48,809 basehttp "GET /attendance/attendance-summary/ HTTP/1.1" 200 14667
+INFO 2025-05-13 20:39:51,842 basehttp "GET /attendance/attendance-summary/1/ HTTP/1.1" 200 12908
+WARNING 2025-05-13 20:39:51,932 basehttp "GET /static/js/attendance.js HTTP/1.1" 404 1807
+INFO 2025-05-13 20:39:56,744 basehttp "GET /attendance/attendance-summary/ HTTP/1.1" 200 14667
+INFO 2025-05-13 20:39:58,076 basehttp "GET /attendance/attendance-details/ HTTP/1.1" 200 13024
+INFO 2025-05-13 20:40:00,105 basehttp "GET /attendance/attendance-details/view/1/ HTTP/1.1" 200 48266
+INFO 2025-05-13 20:40:01,823 basehttp "GET /attendance/work-shifts/ HTTP/1.1" 200 12531
+INFO 2025-05-13 20:40:04,885 basehttp "GET /nhan-vien/ HTTP/1.1" 200 13062
+INFO 2025-05-13 20:40:07,406 basehttp "GET /nhan-vien/1/ HTTP/1.1" 200 13243
+INFO 2025-05-13 20:40:12,759 basehttp "GET /nhan-vien/ HTTP/1.1" 200 13062
+INFO 2025-05-13 20:40:24,938 basehttp "GET /attendance/ HTTP/1.1" 302 0
+INFO 2025-05-13 20:40:24,964 basehttp "GET /attendance/work-shifts/ HTTP/1.1" 200 12531
+INFO 2025-05-13 20:40:26,484 basehttp "GET /attendance/attendance-details/ HTTP/1.1" 200 13024
+INFO 2025-05-13 20:40:27,310 basehttp "GET /attendance/attendance-summary/ HTTP/1.1" 200 14667
+INFO 2025-05-13 20:40:27,969 basehttp "GET /attendance/work-shifts/ HTTP/1.1" 200 12531
+INFO 2025-05-13 20:40:29,147 basehttp "GET /attendance/work-shifts/add/ HTTP/1.1" 200 21194
+INFO 2025-05-13 20:40:37,770 basehttp "GET /nhan-vien/ HTTP/1.1" 200 13062
+INFO 2025-05-13 20:40:39,939 basehttp "GET /nhan-vien/them/ HTTP/1.1" 200 21919
+INFO 2025-05-13 20:40:41,480 basehttp "GET /nhan-vien/ HTTP/1.1" 200 13062
+INFO 2025-05-13 20:40:42,164 basehttp "GET /tien-luong/ HTTP/1.1" 200 12707
+ERROR 2025-05-13 20:40:44,630 basehttp "GET /tien-luong/create/ HTTP/1.1" 500 178005
+ERROR 2025-05-13 20:40:49,879 basehttp "GET /tien-luong/create/ HTTP/1.1" 500 178005
+INFO 2025-05-13 20:41:28,574 basehttp "GET /tien-luong/create/ HTTP/1.1" 200 15306
+INFO 2025-05-13 20:41:50,310 basehttp "GET /tien-luong/create/ HTTP/1.1" 200 15120
+INFO 2025-05-13 20:43:10,200 basehttp "GET /tien-luong/create/ HTTP/1.1" 200 23688
+INFO 2025-05-13 20:44:16,893 basehttp "GET /tien-luong/create/ HTTP/1.1" 200 14901
+INFO 2025-05-13 20:44:42,178 basehttp "GET /tien-luong/create/ HTTP/1.1" 200 15003
+INFO 2025-05-13 20:46:17,989 basehttp "GET / HTTP/1.1" 200 13143
+INFO 2025-05-13 20:46:19,997 basehttp "GET /nhan-vien/ HTTP/1.1" 200 13062
+INFO 2025-05-13 20:46:20,050 basehttp "GET /media/employees/report5.png HTTP/1.1" 304 0
+INFO 2025-05-13 20:46:21,268 basehttp "GET /attendance/ HTTP/1.1" 302 0
+INFO 2025-05-13 20:46:21,290 basehttp "GET /attendance/work-shifts/ HTTP/1.1" 200 12531
+INFO 2025-05-13 20:46:22,339 basehttp "GET /attendance/attendance-summary/ HTTP/1.1" 200 14667
+INFO 2025-05-13 20:46:24,508 basehttp "GET /attendance/attendance-summary/1/ HTTP/1.1" 200 12908
+WARNING 2025-05-13 20:46:24,554 basehttp "GET /static/js/attendance.js HTTP/1.1" 404 1807
+INFO 2025-05-13 20:46:27,601 basehttp "GET /attendance/attendance-summary/ HTTP/1.1" 200 14667
+INFO 2025-05-13 20:46:28,788 basehttp "GET /attendance/attendance-summary/ HTTP/1.1" 200 14667
+INFO 2025-05-13 20:46:58,687 basehttp "GET /attendance/attendance-summary/ HTTP/1.1" 200 14667
+INFO 2025-05-13 20:46:59,257 basehttp "GET /tien-luong/ HTTP/1.1" 200 12707
+INFO 2025-05-13 20:47:02,792 basehttp "GET /tien-luong/create/ HTTP/1.1" 200 15003
+INFO 2025-05-13 20:47:03,948 basehttp "GET /tien-luong/create/ HTTP/1.1" 200 15003
+INFO 2025-05-13 20:47:05,606 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13947
+INFO 2025-05-13 20:47:32,828 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13773
+INFO 2025-05-13 20:47:37,190 basehttp "GET /tien-luong/1/update/ HTTP/1.1" 200 15027
+INFO 2025-05-13 20:47:43,596 basehttp "GET /tien-luong/1/detail/1/ HTTP/1.1" 200 14295
+INFO 2025-05-13 20:48:39,548 basehttp "GET /tien-luong/1/detail/1/ HTTP/1.1" 200 14316
+INFO 2025-05-13 20:49:29,168 basehttp "GET /tien-luong/1/detail/1/ HTTP/1.1" 200 14317
+INFO 2025-05-13 20:50:38,264 basehttp "GET /tien-luong/1/detail/1/ HTTP/1.1" 200 14361
+INFO 2025-05-13 20:50:52,767 basehttp "GET /tien-luong/1/detail/1/ HTTP/1.1" 200 14363
+INFO 2025-05-13 20:51:09,065 basehttp "GET /tien-luong/1/detail/1/ HTTP/1.1" 200 14361
+INFO 2025-05-13 20:51:23,312 basehttp "GET /tien-luong/1/detail/1/ HTTP/1.1" 200 14361
+INFO 2025-05-13 20:51:26,832 basehttp "GET /tien-luong/1/detail/1/ HTTP/1.1" 200 14359
+INFO 2025-05-13 20:51:35,358 basehttp "GET /tien-luong/1/detail/1/ HTTP/1.1" 200 14361
+INFO 2025-05-13 20:51:47,881 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13773
+INFO 2025-05-13 20:51:54,798 basehttp "GET /tien-luong/1/detail/1/ HTTP/1.1" 200 14361
+INFO 2025-05-13 20:51:57,050 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13773
+INFO 2025-05-13 20:52:01,900 basehttp "GET /tien-luong/1/detail/1/ HTTP/1.1" 200 14361
+INFO 2025-05-13 20:52:26,352 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13773
+INFO 2025-05-13 20:52:28,570 basehttp "GET /tien-luong/1/detail/1/ HTTP/1.1" 200 14361
+INFO 2025-05-13 20:52:49,337 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13773
+INFO 2025-05-13 20:55:02,906 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13776
+INFO 2025-05-13 20:55:48,757 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13779
+INFO 2025-05-13 20:56:34,723 basehttp "GET /tien-luong/ HTTP/1.1" 200 12707
+INFO 2025-05-13 20:56:36,556 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13779
+INFO 2025-05-13 20:56:39,023 basehttp "GET /tien-luong/1/update/ HTTP/1.1" 200 15027
+INFO 2025-05-13 20:56:40,858 basehttp "GET /tien-luong/ HTTP/1.1" 200 12707
+INFO 2025-05-13 20:56:45,697 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13779
+INFO 2025-05-13 20:56:48,212 basehttp "GET /tien-luong/1/detail/1/ HTTP/1.1" 200 14361
+INFO 2025-05-13 20:56:49,875 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13779
+INFO 2025-05-13 20:56:55,246 basehttp "GET /tien-luong/ HTTP/1.1" 200 12707
+INFO 2025-05-13 20:56:56,880 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13779
+INFO 2025-05-13 20:56:59,833 basehttp "GET /tien-luong/ HTTP/1.1" 200 12707
+INFO 2025-05-13 20:57:00,954 basehttp "GET /tien-luong/1/update/ HTTP/1.1" 200 15027
+INFO 2025-05-13 20:57:03,115 basehttp "GET /tien-luong/ HTTP/1.1" 200 12707
+INFO 2025-05-13 20:57:06,374 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13779
+INFO 2025-05-13 20:57:25,596 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13564
+INFO 2025-05-13 20:57:32,459 basehttp "GET /tien-luong/ HTTP/1.1" 200 12707
+INFO 2025-05-13 20:58:25,975 basehttp "GET /tien-luong/ HTTP/1.1" 200 12706
+INFO 2025-05-13 20:58:35,185 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13564
+INFO 2025-05-13 20:58:42,191 basehttp "GET /tien-luong/1/update/ HTTP/1.1" 200 15027
+INFO 2025-05-13 20:58:48,953 basehttp "POST /tien-luong/1/update/ HTTP/1.1" 302 0
+INFO 2025-05-13 20:58:48,972 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 14008
+INFO 2025-05-13 20:58:54,411 basehttp "GET /tien-luong/ HTTP/1.1" 200 12706
+INFO 2025-05-13 20:58:57,802 basehttp "GET /tien-luong/1/update/ HTTP/1.1" 200 15027
+INFO 2025-05-13 20:58:59,082 basehttp "GET /tien-luong/ HTTP/1.1" 200 12706
+INFO 2025-05-13 20:59:00,045 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13564
+INFO 2025-05-13 20:59:26,327 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13564
+INFO 2025-05-13 21:00:22,518 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13314
+INFO 2025-05-13 21:00:49,446 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 12919
+INFO 2025-05-13 21:01:40,844 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 12926
+INFO 2025-05-13 21:02:21,230 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 12947
+INFO 2025-05-13 21:02:22,955 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 12947
+INFO 2025-05-13 21:02:41,775 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 12946
+INFO 2025-05-13 21:02:59,190 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 12919
+INFO 2025-05-13 21:03:45,326 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 12936
+INFO 2025-05-13 21:03:53,018 basehttp "GET /tien-luong/1/detail/1/ HTTP/1.1" 200 14361
+INFO 2025-05-13 21:04:00,407 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 12936
+INFO 2025-05-13 21:05:20,050 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13068
+INFO 2025-05-13 21:05:35,056 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 12673
+INFO 2025-05-13 21:05:35,828 basehttp "GET /tien-luong/ HTTP/1.1" 200 12706
+INFO 2025-05-13 21:05:37,762 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 12673
+INFO 2025-05-13 21:06:15,735 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 12723
+INFO 2025-05-13 21:06:17,318 basehttp "GET /tien-luong/ HTTP/1.1" 200 12706
+INFO 2025-05-13 21:06:19,092 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 12723
+INFO 2025-05-13 21:06:24,053 basehttp "GET /tien-luong/ HTTP/1.1" 200 12706
+INFO 2025-05-13 21:06:25,540 basehttp "GET /tien-luong/1/update/ HTTP/1.1" 200 15027
+INFO 2025-05-13 21:06:27,138 basehttp "GET /tien-luong/ HTTP/1.1" 200 12706
+INFO 2025-05-13 21:06:28,719 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 12723
+INFO 2025-05-13 21:06:36,179 basehttp "GET /tien-luong/ HTTP/1.1" 200 12706
+INFO 2025-05-13 21:06:38,014 basehttp "GET /tien-luong/create/ HTTP/1.1" 200 15003
+INFO 2025-05-13 21:06:39,692 basehttp "GET /tien-luong/ HTTP/1.1" 200 12706
+INFO 2025-05-13 21:06:42,122 basehttp "GET /tien-luong/1/update/ HTTP/1.1" 200 15027
+INFO 2025-05-13 21:07:02,852 basehttp "POST /tien-luong/1/update/ HTTP/1.1" 302 0
+INFO 2025-05-13 21:07:02,880 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13165
+INFO 2025-05-13 21:07:36,227 basehttp "GET /tien-luong/1/detail/1/ HTTP/1.1" 200 13972
+INFO 2025-05-13 21:07:58,481 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 12568
+INFO 2025-05-13 21:08:11,315 basehttp "GET /tien-luong/ HTTP/1.1" 200 12705
+INFO 2025-05-13 21:08:16,393 basehttp "GET /tien-luong/1/update/ HTTP/1.1" 200 15026
+INFO 2025-05-13 21:08:19,684 basehttp "POST /tien-luong/1/update/ HTTP/1.1" 302 0
+INFO 2025-05-13 21:08:19,706 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13015
+INFO 2025-05-13 21:08:23,771 basehttp "GET /tien-luong/ HTTP/1.1" 200 12448
+INFO 2025-05-13 21:08:30,312 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 12572
+INFO 2025-05-13 21:08:34,807 basehttp "GET /tien-luong/1/detail/1/ HTTP/1.1" 200 13972
+INFO 2025-05-13 21:08:37,357 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 12572
+INFO 2025-05-13 21:08:38,452 basehttp "GET /tien-luong/ HTTP/1.1" 200 12448
+INFO 2025-05-13 21:08:47,633 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 12572
+INFO 2025-05-13 21:08:50,552 basehttp "GET /tien-luong/ HTTP/1.1" 200 12448
+INFO 2025-05-13 21:08:55,301 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 12572
+INFO 2025-05-13 21:08:57,763 basehttp "GET /tien-luong/ HTTP/1.1" 200 12448
+INFO 2025-05-13 21:08:59,094 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 12572
+INFO 2025-05-13 21:09:03,377 basehttp "GET /tien-luong/1/detail/1/ HTTP/1.1" 200 13972
+INFO 2025-05-13 21:09:04,400 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 12572
+INFO 2025-05-13 21:09:05,126 basehttp "GET /tien-luong/ HTTP/1.1" 200 12448
+INFO 2025-05-13 21:09:09,309 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 12572
+INFO 2025-05-13 21:10:16,420 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13582
+INFO 2025-05-13 21:10:43,160 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13187
+INFO 2025-05-13 21:10:45,928 basehttp "GET /tien-luong/1/detail/1/ HTTP/1.1" 200 13972
+INFO 2025-05-13 21:10:47,151 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13187
+INFO 2025-05-13 21:11:14,563 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 12976
+INFO 2025-05-13 21:11:20,179 basehttp "GET /tien-luong/ HTTP/1.1" 200 12448
+INFO 2025-05-13 21:11:21,886 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 12976
+ERROR 2025-05-13 21:11:46,345 log Internal Server Error: /tien-luong/1/
+Traceback (most recent call last):
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 505, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'endif'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "D:\HK22425\HocKhac\btcd4\hr_management\payroll\views.py", line 225, in payroll_detail
+    return render(request, 'payroll/payroll_detail.html', context)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\backends\django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 200, in compile_nodelist
+    return parser.parse()
+           ~~~~~~~~~~~~^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 507, in parse
+    self.invalid_block_tag(token, command, parse_until)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 558, in invalid_block_tag
+    raise self.error(
+    ...<8 lines>...
+    )
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 35: 'endif', expected 'endblock'. Did you forget to register or load this tag?
+ERROR 2025-05-13 21:11:46,352 basehttp "GET /tien-luong/1/ HTTP/1.1" 500 235622
+INFO 2025-05-13 21:15:34,160 basehttp "GET /tien-luong/ HTTP/1.1" 200 12448
+INFO 2025-05-13 21:15:35,237 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13323
+INFO 2025-05-13 21:15:36,596 basehttp "GET /tien-luong/1/update/ HTTP/1.1" 302 0
+INFO 2025-05-13 21:15:36,622 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13761
+INFO 2025-05-13 21:15:39,134 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13323
+INFO 2025-05-13 21:15:46,256 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13323
+INFO 2025-05-13 21:16:10,691 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13127
+INFO 2025-05-13 21:16:34,360 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13130
+INFO 2025-05-13 21:16:37,133 basehttp "GET /tien-luong/1/update/ HTTP/1.1" 302 0
+INFO 2025-05-13 21:16:37,158 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13568
+INFO 2025-05-13 21:16:41,494 basehttp "GET /tien-luong/1/update/ HTTP/1.1" 302 0
+INFO 2025-05-13 21:16:41,515 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13568
+INFO 2025-05-13 21:16:44,437 basehttp "GET /tien-luong/ HTTP/1.1" 200 12448
+INFO 2025-05-13 21:16:45,423 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13130
+INFO 2025-05-13 21:16:46,302 basehttp "GET /tien-luong/1/update/ HTTP/1.1" 302 0
+INFO 2025-05-13 21:16:46,322 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13568
+INFO 2025-05-13 21:18:45,699 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13582
+INFO 2025-05-13 21:18:55,131 basehttp "GET /tien-luong/ HTTP/1.1" 200 12448
+INFO 2025-05-13 21:18:57,066 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13582
+INFO 2025-05-13 21:19:08,949 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13130
+INFO 2025-05-13 21:21:50,249 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 12976
+INFO 2025-05-13 21:21:53,046 basehttp "GET /tien-luong/1/detail/1/ HTTP/1.1" 200 13972
+INFO 2025-05-13 21:21:54,308 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 12976
+INFO 2025-05-13 21:21:56,116 basehttp "GET /tien-luong/ HTTP/1.1" 200 12448
+INFO 2025-05-13 21:21:59,191 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 12976
+INFO 2025-05-13 21:22:03,983 basehttp "GET /tien-luong/1/disable/ HTTP/1.1" 302 0
+INFO 2025-05-13 21:22:04,005 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13411
+INFO 2025-05-13 21:22:08,139 basehttp "GET /tien-luong/ HTTP/1.1" 200 12448
+INFO 2025-05-13 21:22:08,972 basehttp "GET /tien-luong/1/disable/ HTTP/1.1" 302 0
+INFO 2025-05-13 21:22:08,997 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13411
+INFO 2025-05-13 21:23:26,168 basehttp "GET /tien-luong/ HTTP/1.1" 200 12448
+INFO 2025-05-13 21:25:57,510 autoreload D:\HK22425\HocKhac\btcd4\hr_management\payroll\views.py changed, reloading.
+INFO 2025-05-13 21:26:01,163 autoreload Watching for file changes with StatReloader
+INFO 2025-05-13 21:26:28,577 autoreload D:\HK22425\HocKhac\btcd4\hr_management\payroll\views.py changed, reloading.
+INFO 2025-05-13 21:26:32,005 autoreload Watching for file changes with StatReloader
+INFO 2025-05-13 21:26:39,089 autoreload D:\HK22425\HocKhac\btcd4\hr_management\payroll\views.py changed, reloading.
+INFO 2025-05-13 21:26:44,891 autoreload Watching for file changes with StatReloader
+INFO 2025-05-13 21:26:51,072 autoreload D:\HK22425\HocKhac\btcd4\hr_management\payroll\views.py changed, reloading.
+INFO 2025-05-13 21:26:54,493 autoreload Watching for file changes with StatReloader
+INFO 2025-05-13 21:27:06,800 autoreload D:\HK22425\HocKhac\btcd4\hr_management\payroll\views.py changed, reloading.
+INFO 2025-05-13 21:27:10,292 autoreload Watching for file changes with StatReloader
+INFO 2025-05-13 21:27:20,887 autoreload D:\HK22425\HocKhac\btcd4\hr_management\payroll\views.py changed, reloading.
+INFO 2025-05-13 21:27:24,053 autoreload Watching for file changes with StatReloader
+INFO 2025-05-13 21:27:40,279 autoreload D:\HK22425\HocKhac\btcd4\hr_management\payroll\views.py changed, reloading.
+INFO 2025-05-13 21:27:44,374 autoreload Watching for file changes with StatReloader
+INFO 2025-05-13 21:29:01,533 autoreload D:\HK22425\HocKhac\btcd4\hr_management\payroll\views.py changed, reloading.
+INFO 2025-05-13 21:29:05,443 autoreload Watching for file changes with StatReloader
+INFO 2025-05-13 21:29:07,770 basehttp "GET / HTTP/1.1" 200 13143
+INFO 2025-05-13 21:29:09,899 basehttp "GET /tien-luong/ HTTP/1.1" 200 12448
+ERROR 2025-05-13 21:29:12,422 log Internal Server Error: /tien-luong/1/
+Traceback (most recent call last):
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\smartif.py", line 179, in translate_token
+    op = OPERATORS[token]
+         ~~~~~~~~~^^^^^^^
+KeyError: '(payroll.status'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "D:\HK22425\HocKhac\btcd4\hr_management\payroll\views.py", line 233, in payroll_detail
+    return render(request, 'payroll/payroll_detail.html', context)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\backends\django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 200, in compile_nodelist
+    return parser.parse()
+           ~~~~~~~~~~~~^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\defaulttags.py", line 952, in do_if
+    condition = TemplateIfParser(parser, bits).parse()
+                ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\defaulttags.py", line 885, in __init__
+    super().__init__(*args, **kwargs)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\smartif.py", line 170, in __init__
+    mapped_tokens.append(self.translate_token(token))
+                         ~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\smartif.py", line 181, in translate_token
+    return self.create_var(token)
+           ~~~~~~~~~~~~~~~^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\defaulttags.py", line 888, in create_var
+    return TemplateLiteral(self.template_parser.compile_filter(value), value)
+                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 600, in compile_filter
+    return FilterExpression(token, self)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 703, in __init__
+    raise TemplateSyntaxError(
+    ...<2 lines>...
+    )
+django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: '(payroll.status' from '(payroll.status'
+ERROR 2025-05-13 21:29:12,440 basehttp "GET /tien-luong/1/ HTTP/1.1" 500 276253
+INFO 2025-05-13 21:31:20,494 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13810
+INFO 2025-05-13 21:31:26,181 basehttp "GET /tien-luong/1/update/ HTTP/1.1" 200 15026
+INFO 2025-05-13 21:31:37,793 basehttp "POST /tien-luong/1/update/ HTTP/1.1" 302 0
+INFO 2025-05-13 21:31:37,815 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 14249
+INFO 2025-05-13 21:31:38,821 basehttp "GET /tien-luong/1/update/ HTTP/1.1" 200 15026
+INFO 2025-05-13 21:31:41,387 basehttp "POST /tien-luong/1/update/ HTTP/1.1" 302 0
+INFO 2025-05-13 21:31:41,409 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 14254
+INFO 2025-05-13 21:31:42,481 basehttp "GET /tien-luong/1/update/ HTTP/1.1" 200 15026
+INFO 2025-05-13 21:31:45,537 basehttp "POST /tien-luong/1/update/ HTTP/1.1" 302 0
+INFO 2025-05-13 21:31:45,563 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 14258
+ERROR 2025-05-13 21:32:08,367 log Internal Server Error: /tien-luong/1/mark-as-paid/
+Traceback (most recent call last):
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "D:\HK22425\HocKhac\btcd4\hr_management\payroll\views.py", line 410, in mark_as_paid
+    return render(request, 'payroll/payroll_mark_as_paid.html', context)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: payroll/payroll_mark_as_paid.html
+ERROR 2025-05-13 21:32:08,369 basehttp "GET /tien-luong/1/mark-as-paid/ HTTP/1.1" 500 89357
+INFO 2025-05-13 21:33:30,672 autoreload D:\HK22425\HocKhac\btcd4\hr_management\payroll\admin.py changed, reloading.
+INFO 2025-05-13 21:33:31,832 autoreload Watching for file changes with StatReloader
+INFO 2025-05-13 21:33:32,480 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13576
+INFO 2025-05-13 21:33:33,030 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13576
+ERROR 2025-05-13 21:34:27,183 log Internal Server Error: /tien-luong/1/approve/
+Traceback (most recent call last):
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "D:\HK22425\HocKhac\btcd4\hr_management\payroll\views.py", line 383, in approve_payroll
+    return render(request, 'payroll/payroll_approve.html', context)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: payroll/payroll_approve.html
+ERROR 2025-05-13 21:34:27,189 basehttp "GET /tien-luong/1/approve/ HTTP/1.1" 500 89180
+INFO 2025-05-13 21:35:07,108 autoreload D:\HK22425\HocKhac\btcd4\hr_management\payroll\views.py changed, reloading.
+INFO 2025-05-13 21:35:09,135 autoreload Watching for file changes with StatReloader
+INFO 2025-05-13 21:35:09,819 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13358
+INFO 2025-05-13 21:35:40,233 autoreload D:\HK22425\HocKhac\btcd4\hr_management\payroll\urls.py changed, reloading.
+INFO 2025-05-13 21:35:41,827 autoreload Watching for file changes with StatReloader
+INFO 2025-05-13 21:35:42,487 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13153
+INFO 2025-05-13 21:36:00,009 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13155
+INFO 2025-05-13 21:36:00,990 basehttp "GET /tien-luong/ HTTP/1.1" 200 12453
+INFO 2025-05-13 21:36:04,691 basehttp "GET /tien-luong/1/disable/ HTTP/1.1" 200 10237
+INFO 2025-05-13 21:36:31,370 basehttp "GET /tien-luong/1/disable/ HTTP/1.1" 200 10235
+INFO 2025-05-13 21:36:40,985 basehttp "GET /tien-luong/1/disable/ HTTP/1.1" 200 10234
+INFO 2025-05-13 21:36:44,004 basehttp "POST /tien-luong/1/disable/ HTTP/1.1" 302 0
+INFO 2025-05-13 21:36:44,026 basehttp "GET /tien-luong/ HTTP/1.1" 200 12935
+INFO 2025-05-13 21:36:47,069 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13658
+INFO 2025-05-13 21:36:50,023 basehttp "GET /tien-luong/ HTTP/1.1" 200 12489
+INFO 2025-05-13 21:36:51,253 basehttp "GET /tien-luong/1/activate/ HTTP/1.1" 200 12631
+INFO 2025-05-13 21:36:53,533 basehttp "POST /tien-luong/1/activate/ HTTP/1.1" 302 0
+INFO 2025-05-13 21:36:53,552 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13595
+INFO 2025-05-13 21:36:57,417 basehttp "GET /tien-luong/ HTTP/1.1" 200 12705
+INFO 2025-05-13 21:37:00,128 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13146
+INFO 2025-05-13 21:37:11,359 basehttp "GET /tien-luong/ HTTP/1.1" 200 12705
+INFO 2025-05-13 21:37:14,988 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13146
+INFO 2025-05-13 21:37:17,558 basehttp "GET /tien-luong/1/detail/1/ HTTP/1.1" 200 13972
+INFO 2025-05-13 21:37:19,733 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13146
+INFO 2025-05-13 21:37:42,793 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13146
+INFO 2025-05-13 21:37:46,049 basehttp "GET /tien-luong/ HTTP/1.1" 200 12705
+INFO 2025-05-13 21:37:48,980 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13146
+ERROR 2025-05-13 21:38:10,528 log Internal Server Error: /tien-luong/1/
+Traceback (most recent call last):
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\loader_tags.py", line 132, in render
+    compiled_parent = self.get_parent(context)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\loader_tags.py", line 129, in get_parent
+    return self.find_template(parent, context)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\loader_tags.py", line 107, in find_template
+    template, origin = context.template.engine.find_template(
+                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        template_name,
+        ^^^^^^^^^^^^^^
+        skip=history,
+        ^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\engine.py", line 161, in find_template
+    raise TemplateDoesNotExist(name, tried=tried)
+django.template.exceptions.TemplateDoesNotExist: base_payroll.html
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "D:\HK22425\HocKhac\btcd4\hr_management\payroll\views.py", line 233, in payroll_detail
+    return render(request, 'payroll/payroll_detail.html', context)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\backends\django.py", line 63, in render
+    reraise(exc, self.backend)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\backends\django.py", line 84, in reraise
+    raise new from exc
+django.template.exceptions.TemplateDoesNotExist: base_payroll.html
+ERROR 2025-05-13 21:38:10,538 basehttp "GET /tien-luong/1/ HTTP/1.1" 500 137253
+ERROR 2025-05-13 21:38:23,526 log Internal Server Error: /tien-luong/1/
+Traceback (most recent call last):
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\loader_tags.py", line 132, in render
+    compiled_parent = self.get_parent(context)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\loader_tags.py", line 129, in get_parent
+    return self.find_template(parent, context)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\loader_tags.py", line 107, in find_template
+    template, origin = context.template.engine.find_template(
+                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        template_name,
+        ^^^^^^^^^^^^^^
+        skip=history,
+        ^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\engine.py", line 161, in find_template
+    raise TemplateDoesNotExist(name, tried=tried)
+django.template.exceptions.TemplateDoesNotExist: base_payroll.html
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "D:\HK22425\HocKhac\btcd4\hr_management\payroll\views.py", line 233, in payroll_detail
+    return render(request, 'payroll/payroll_detail.html', context)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\backends\django.py", line 63, in render
+    reraise(exc, self.backend)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\backends\django.py", line 84, in reraise
+    raise new from exc
+django.template.exceptions.TemplateDoesNotExist: base_payroll.html
+ERROR 2025-05-13 21:38:23,531 basehttp "GET /tien-luong/1/ HTTP/1.1" 500 137253
+ERROR 2025-05-13 21:39:22,613 log Internal Server Error: /tien-luong/1/
+Traceback (most recent call last):
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\loader_tags.py", line 132, in render
+    compiled_parent = self.get_parent(context)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\loader_tags.py", line 129, in get_parent
+    return self.find_template(parent, context)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\loader_tags.py", line 107, in find_template
+    template, origin = context.template.engine.find_template(
+                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        template_name,
+        ^^^^^^^^^^^^^^
+        skip=history,
+        ^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\engine.py", line 161, in find_template
+    raise TemplateDoesNotExist(name, tried=tried)
+django.template.exceptions.TemplateDoesNotExist: base_payroll.html
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "D:\HK22425\HocKhac\btcd4\hr_management\payroll\views.py", line 233, in payroll_detail
+    return render(request, 'payroll/payroll_detail.html', context)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\backends\django.py", line 63, in render
+    reraise(exc, self.backend)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\backends\django.py", line 84, in reraise
+    raise new from exc
+django.template.exceptions.TemplateDoesNotExist: base_payroll.html
+ERROR 2025-05-13 21:39:22,622 basehttp "GET /tien-luong/1/ HTTP/1.1" 500 137415
+INFO 2025-05-13 21:39:46,695 basehttp "GET /tien-luong/ HTTP/1.1" 200 12705
+INFO 2025-05-13 21:39:47,906 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13249
+INFO 2025-05-13 21:39:50,424 basehttp "GET /tien-luong/1/update/ HTTP/1.1" 200 15026
+INFO 2025-05-13 21:39:52,257 basehttp "GET /tien-luong/ HTTP/1.1" 200 12705
+INFO 2025-05-13 21:39:53,976 basehttp "GET /tien-luong/1/update/ HTTP/1.1" 200 15026
+INFO 2025-05-13 21:39:55,407 basehttp "GET /tien-luong/ HTTP/1.1" 200 12705
+INFO 2025-05-13 21:39:56,526 basehttp "GET /tien-luong/create/ HTTP/1.1" 200 15003
+INFO 2025-05-13 21:39:57,895 basehttp "GET /tien-luong/ HTTP/1.1" 200 12705
+INFO 2025-05-13 21:40:03,797 basehttp "GET /tien-luong/1/disable/ HTTP/1.1" 200 10337
+INFO 2025-05-13 21:40:04,790 basehttp "POST /tien-luong/1/disable/ HTTP/1.1" 302 0
+INFO 2025-05-13 21:40:04,830 basehttp "GET /tien-luong/ HTTP/1.1" 200 12935
+INFO 2025-05-13 21:40:06,327 basehttp "GET /tien-luong/1/activate/ HTTP/1.1" 200 12631
+INFO 2025-05-13 21:40:07,790 basehttp "POST /tien-luong/1/activate/ HTTP/1.1" 302 0
+INFO 2025-05-13 21:40:07,809 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13698
+INFO 2025-05-13 21:40:09,823 basehttp "GET /tien-luong/ HTTP/1.1" 200 12705
+INFO 2025-05-13 21:40:12,469 basehttp "GET /tien-luong/create/ HTTP/1.1" 200 15003
+INFO 2025-05-13 21:40:13,652 basehttp "GET /tien-luong/ HTTP/1.1" 200 12705
+INFO 2025-05-13 21:40:14,523 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13249
+INFO 2025-05-13 21:40:18,543 basehttp "GET /tien-luong/ HTTP/1.1" 200 12705
+INFO 2025-05-13 21:40:21,338 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13249
+INFO 2025-05-13 21:40:23,635 basehttp "GET /tien-luong/ HTTP/1.1" 200 12705
+INFO 2025-05-13 21:40:27,101 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13249
+INFO 2025-05-13 21:40:34,392 basehttp "GET /tien-luong/ HTTP/1.1" 200 12705
+INFO 2025-05-13 21:40:55,908 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13249
+INFO 2025-05-13 21:42:00,970 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13607
+INFO 2025-05-13 21:42:35,066 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13318
+INFO 2025-05-13 21:42:47,303 basehttp "GET /attendance/ HTTP/1.1" 302 0
+INFO 2025-05-13 21:42:47,331 basehttp "GET /attendance/work-shifts/ HTTP/1.1" 200 12531
+INFO 2025-05-13 21:43:30,436 basehttp "GET /attendance/work-shifts/ HTTP/1.1" 200 12531
+INFO 2025-05-13 21:43:32,162 basehttp "GET /tien-luong/ HTTP/1.1" 200 12705
+INFO 2025-05-13 21:43:33,684 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13651
+INFO 2025-05-13 21:43:46,056 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13408
+INFO 2025-05-13 21:43:47,940 basehttp "GET /attendance/ HTTP/1.1" 302 0
+INFO 2025-05-13 21:43:47,964 basehttp "GET /attendance/work-shifts/ HTTP/1.1" 200 12531
+INFO 2025-05-13 21:43:48,685 basehttp "GET /tien-luong/ HTTP/1.1" 200 12705
+INFO 2025-05-13 21:43:51,092 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13408
+INFO 2025-05-13 21:44:03,962 basehttp "GET /tien-luong/ HTTP/1.1" 200 12705
+INFO 2025-05-13 21:44:05,356 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13408
+INFO 2025-05-13 21:44:09,653 basehttp "GET /tien-luong/ HTTP/1.1" 200 12705
+INFO 2025-05-13 21:44:12,051 basehttp "GET /tien-luong/1/update/ HTTP/1.1" 200 15026
+INFO 2025-05-13 21:44:13,671 basehttp "GET /tien-luong/ HTTP/1.1" 200 12705
+INFO 2025-05-13 21:44:16,333 basehttp "GET /tien-luong/1/ HTTP/1.1" 200 13408
+INFO 2025-05-13 21:44:17,534 basehttp "GET /tien-luong/ HTTP/1.1" 200 12705
+INFO 2025-05-13 21:44:22,917 basehttp "GET /attendance/ HTTP/1.1" 302 0
+INFO 2025-05-13 21:44:22,936 basehttp "GET /attendance/work-shifts/ HTTP/1.1" 200 12531
+INFO 2025-05-13 21:44:24,634 basehttp "GET /attendance/attendance-summary/ HTTP/1.1" 200 14667
+INFO 2025-05-13 21:44:28,415 basehttp "GET /attendance/attendance-summary/1/ HTTP/1.1" 200 12908
+WARNING 2025-05-13 21:44:28,456 basehttp "GET /static/js/attendance.js HTTP/1.1" 404 1807
+INFO 2025-05-13 21:46:01,004 autoreload D:\HK22425\HocKhac\btcd4\hr_management\attendance\views.py changed, reloading.
+INFO 2025-05-13 21:46:02,110 autoreload Watching for file changes with StatReloader
+INFO 2025-05-13 21:48:14,495 autoreload D:\HK22425\HocKhac\btcd4\hr_management\attendance\views.py changed, reloading.
+INFO 2025-05-13 21:48:16,418 autoreload Watching for file changes with StatReloader
+INFO 2025-05-13 21:48:17,137 basehttp "GET /attendance/attendance-summary/1/ HTTP/1.1" 200 12908
+WARNING 2025-05-13 21:48:17,192 basehttp "GET /static/js/attendance.js HTTP/1.1" 404 1807
+INFO 2025-05-13 21:48:20,453 basehttp "GET /attendance/attendance-summary/ HTTP/1.1" 200 14667
+INFO 2025-05-13 21:48:22,410 basehttp "GET /attendance/attendance-summary/1/ HTTP/1.1" 200 12908
+WARNING 2025-05-13 21:48:22,462 basehttp "GET /static/js/attendance.js HTTP/1.1" 404 1807
+INFO 2025-05-13 21:48:47,341 basehttp "GET /attendance/attendance-summary/1/ HTTP/1.1" 200 18201
+INFO 2025-05-13 21:48:54,151 basehttp "POST /attendance/attendance-summary/transfer-to-payroll/1/ HTTP/1.1" 200 169
+INFO 2025-05-13 21:48:55,791 basehttp "GET /attendance/attendance-summary/1/ HTTP/1.1" 200 18201
+INFO 2025-05-13 21:48:57,820 basehttp "GET /tien-luong/ HTTP/1.1" 200 14243
+INFO 2025-05-13 21:49:02,765 basehttp "GET /attendance/ HTTP/1.1" 302 0
+INFO 2025-05-13 21:49:02,789 basehttp "GET /attendance/work-shifts/ HTTP/1.1" 200 12531
+INFO 2025-05-13 21:49:04,430 basehttp "GET /tien-luong/ HTTP/1.1" 200 14243
+ERROR 2025-05-13 21:49:10,780 log Internal Server Error: /tien-luong/2/
+Traceback (most recent call last):
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 880, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+TypeError: 'NoneType' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 890, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'NoneType' object has no attribute 'username'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 896, in _resolve_lookup
+    current = current[int(bit)]
+                      ~~~^^^^^
+ValueError: invalid literal for int() with base 10: 'username'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "D:\HK22425\HocKhac\btcd4\hr_management\payroll\views.py", line 233, in payroll_detail
+    return render(request, 'payroll/payroll_detail.html', context)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 1064, in render
+    output = self.filter_expression.resolve(context)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 736, in resolve
+    arg_vals.append(arg.resolve(context))
+                    ~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 847, in resolve
+    value = self._resolve_lookup(context)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 903, in _resolve_lookup
+    raise VariableDoesNotExist(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+    )  # missing attribute
+    ^
+django.template.base.VariableDoesNotExist: Failed lookup for key [username] in None
+ERROR 2025-05-13 21:49:10,792 basehttp "GET /tien-luong/2/ HTTP/1.1" 500 202544
+INFO 2025-05-13 21:49:42,683 basehttp "GET /tien-luong/2/update/ HTTP/1.1" 200 15058
+INFO 2025-05-13 21:49:45,695 basehttp "POST /tien-luong/2/update/ HTTP/1.1" 302 0
+ERROR 2025-05-13 21:49:45,907 log Internal Server Error: /tien-luong/2/
+Traceback (most recent call last):
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 880, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+TypeError: 'NoneType' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 890, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'NoneType' object has no attribute 'username'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 896, in _resolve_lookup
+    current = current[int(bit)]
+                      ~~~^^^^^
+ValueError: invalid literal for int() with base 10: 'username'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "D:\HK22425\HocKhac\btcd4\hr_management\payroll\views.py", line 233, in payroll_detail
+    return render(request, 'payroll/payroll_detail.html', context)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 1064, in render
+    output = self.filter_expression.resolve(context)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 736, in resolve
+    arg_vals.append(arg.resolve(context))
+                    ~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 847, in resolve
+    value = self._resolve_lookup(context)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 903, in _resolve_lookup
+    raise VariableDoesNotExist(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+    )  # missing attribute
+    ^
+django.template.base.VariableDoesNotExist: Failed lookup for key [username] in None
+ERROR 2025-05-13 21:49:45,923 basehttp "GET /tien-luong/2/ HTTP/1.1" 500 203032
+ERROR 2025-05-13 21:50:00,079 log Internal Server Error: /tien-luong/2/
+Traceback (most recent call last):
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 880, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+TypeError: 'NoneType' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 890, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'NoneType' object has no attribute 'username'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 896, in _resolve_lookup
+    current = current[int(bit)]
+                      ~~~^^^^^
+ValueError: invalid literal for int() with base 10: 'username'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "D:\HK22425\HocKhac\btcd4\hr_management\payroll\views.py", line 233, in payroll_detail
+    return render(request, 'payroll/payroll_detail.html', context)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 1064, in render
+    output = self.filter_expression.resolve(context)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 736, in resolve
+    arg_vals.append(arg.resolve(context))
+                    ~~~~~~~~~~~^^^^^^^^^
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 847, in resolve
+    value = self._resolve_lookup(context)
+  File "D:\HK22425\HocKhac\btcd4\.venv\Lib\site-packages\django\template\base.py", line 903, in _resolve_lookup
+    raise VariableDoesNotExist(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+    )  # missing attribute
+    ^
+django.template.base.VariableDoesNotExist: Failed lookup for key [username] in None
+ERROR 2025-05-13 21:50:00,096 basehttp "GET /tien-luong/2/ HTTP/1.1" 500 202422
+INFO 2025-05-13 21:50:32,011 basehttp "GET /tien-luong/2/ HTTP/1.1" 200 13281
+INFO 2025-05-13 21:51:11,777 autoreload D:\HK22425\HocKhac\btcd4\hr_management\payroll\models.py changed, reloading.
+INFO 2025-05-13 21:51:13,227 autoreload Watching for file changes with StatReloader
+INFO 2025-05-13 21:52:29,709 autoreload Watching for file changes with StatReloader
+INFO 2025-05-13 21:52:31,931 basehttp "GET / HTTP/1.1" 200 13143
+INFO 2025-05-13 21:52:34,821 basehttp "GET /attendance/ HTTP/1.1" 302 0
+INFO 2025-05-13 21:52:34,847 basehttp "GET /attendance/work-shifts/ HTTP/1.1" 200 12531
+INFO 2025-05-13 21:52:37,733 basehttp "GET /attendance/attendance-summary/ HTTP/1.1" 200 14667
+INFO 2025-05-13 21:52:51,944 basehttp "POST /attendance/attendance-summary/add/ HTTP/1.1" 302 0
+INFO 2025-05-13 21:52:51,965 basehttp "GET /attendance/attendance-summary/ HTTP/1.1" 200 16233
+INFO 2025-05-13 21:52:53,849 basehttp "GET /attendance/attendance-summary/2/ HTTP/1.1" 200 18201
+INFO 2025-05-13 21:52:56,953 basehttp "POST /attendance/attendance-summary/transfer-to-payroll/2/ HTTP/1.1" 200 169
+INFO 2025-05-13 21:52:58,399 basehttp "GET /attendance/attendance-summary/2/ HTTP/1.1" 200 18201
+INFO 2025-05-13 21:53:00,543 basehttp "GET /tien-luong/ HTTP/1.1" 200 15781
+INFO 2025-05-13 21:53:04,169 basehttp "GET /tien-luong/3/ HTTP/1.1" 200 13127
+INFO 2025-05-13 21:53:09,654 basehttp "GET /tien-luong/ HTTP/1.1" 200 15781
+INFO 2025-05-13 21:53:12,401 basehttp "GET / HTTP/1.1" 200 13143
+INFO 2025-05-13 21:53:15,340 basehttp "GET /nhan-vien/ HTTP/1.1" 200 13062
+INFO 2025-05-13 21:53:15,377 basehttp "GET /media/employees/report5.png HTTP/1.1" 304 0
+INFO 2025-05-13 21:53:23,568 basehttp "GET / HTTP/1.1" 200 13143
+INFO 2025-05-13 21:53:24,205 basehttp "GET /nhan-vien/ HTTP/1.1" 200 13062
+INFO 2025-05-13 21:53:30,462 basehttp "GET /nhan-vien/ HTTP/1.1" 200 13062
+INFO 2025-05-13 21:53:32,399 basehttp "GET /attendance/ HTTP/1.1" 302 0
+INFO 2025-05-13 21:53:32,442 basehttp "GET /attendance/work-shifts/ HTTP/1.1" 200 12531
+INFO 2025-05-13 21:53:33,661 basehttp "GET /tien-luong/ HTTP/1.1" 200 15781
+INFO 2025-05-13 21:53:43,306 basehttp "GET /tien-luong/ HTTP/1.1" 200 15781
+INFO 2025-05-13 21:53:44,476 basehttp "GET / HTTP/1.1" 200 13143
+INFO 2025-05-13 21:53:49,187 basehttp "GET /nhan-vien/ HTTP/1.1" 200 13062
+INFO 2025-05-13 21:53:50,524 basehttp "GET /nhan-vien/ HTTP/1.1" 200 13062
+INFO 2025-05-13 21:53:53,066 basehttp "GET /nhan-vien/them/ HTTP/1.1" 200 21919
+INFO 2025-05-13 22:38:53,315 autoreload D:\HK22425\HocKhac\btcd4\hr_management\employees\models.py changed, reloading.
+INFO 2025-05-13 22:38:55,905 autoreload Watching for file changes with StatReloader
+INFO 2025-05-13 22:39:27,309 autoreload D:\HK22425\HocKhac\btcd4\hr_management\employees\models.py changed, reloading.
+INFO 2025-05-13 22:39:28,693 autoreload Watching for file changes with StatReloader
+INFO 2025-05-13 22:39:59,768 autoreload D:\HK22425\HocKhac\btcd4\hr_management\employees\models.py changed, reloading.
+INFO 2025-05-13 22:40:04,540 autoreload Watching for file changes with StatReloader
+INFO 2025-05-13 22:40:08,174 autoreload D:\HK22425\HocKhac\btcd4\hr_management\employees\models.py changed, reloading.
+INFO 2025-05-13 22:40:11,153 autoreload Watching for file changes with StatReloader
+INFO 2025-05-13 22:41:14,811 autoreload D:\HK22425\HocKhac\btcd4\hr_management\payroll\models.py changed, reloading.
+INFO 2025-05-13 22:41:17,713 autoreload Watching for file changes with StatReloader
+INFO 2025-05-13 22:41:55,912 autoreload D:\HK22425\HocKhac\btcd4\hr_management\payroll\admin.py changed, reloading.
+INFO 2025-05-13 22:41:57,532 autoreload Watching for file changes with StatReloader
+INFO 2025-05-13 22:42:15,050 autoreload D:\HK22425\HocKhac\btcd4\hr_management\payroll\admin.py changed, reloading.
+INFO 2025-05-13 22:42:17,228 autoreload Watching for file changes with StatReloader
+INFO 2025-05-13 22:42:28,917 autoreload D:\HK22425\HocKhac\btcd4\hr_management\employees\admin.py changed, reloading.
+INFO 2025-05-13 22:42:31,198 autoreload Watching for file changes with StatReloader
+INFO 2025-05-13 22:43:29,889 autoreload Watching for file changes with StatReloader
+INFO 2025-05-13 22:43:31,701 basehttp "GET / HTTP/1.1" 200 13143
+INFO 2025-05-13 22:43:35,540 basehttp "GET /nhan-vien/ HTTP/1.1" 200 13062
+INFO 2025-05-13 22:43:35,599 basehttp "GET /media/employees/report5.png HTTP/1.1" 304 0
+INFO 2025-05-13 22:43:36,384 basehttp "GET /attendance/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:43:36,412 basehttp "GET /attendance/work-shifts/ HTTP/1.1" 200 12531
+INFO 2025-05-13 22:43:38,122 basehttp "GET /attendance/attendance-summary/ HTTP/1.1" 200 15804
+INFO 2025-05-13 22:43:41,100 basehttp "GET /attendance/attendance-summary/2/ HTTP/1.1" 200 18201
+INFO 2025-05-13 22:43:43,763 basehttp "POST /attendance/attendance-summary/transfer-to-payroll/2/ HTTP/1.1" 200 169
+INFO 2025-05-13 22:43:44,892 basehttp "GET /attendance/attendance-summary/2/ HTTP/1.1" 200 18201
+INFO 2025-05-13 22:43:45,733 basehttp "GET /tien-luong/ HTTP/1.1" 200 17319
+INFO 2025-05-13 22:43:52,507 basehttp "GET /nhan-vien/ HTTP/1.1" 200 13062
+INFO 2025-05-13 22:43:57,496 basehttp "GET /nhan-vien/1/ HTTP/1.1" 200 13243
+INFO 2025-05-13 22:44:02,620 basehttp "GET /nhan-vien/ HTTP/1.1" 200 13062
+INFO 2025-05-13 22:44:03,760 basehttp "GET /nhan-vien/them/ HTTP/1.1" 200 21919
+INFO 2025-05-13 22:47:43,397 basehttp "GET /tien-luong/ HTTP/1.1" 200 17319
+INFO 2025-05-13 22:47:46,907 basehttp "GET /tien-luong/4/update/ HTTP/1.1" 200 15092
+INFO 2025-05-13 22:47:48,464 basehttp "GET /tien-luong/ HTTP/1.1" 200 17319
+INFO 2025-05-13 22:47:49,197 basehttp "GET /tien-luong/4/ HTTP/1.1" 200 13127
+INFO 2025-05-13 22:47:51,248 basehttp "GET /tien-luong/4/detail/4/ HTTP/1.1" 200 13972
+INFO 2025-05-13 22:47:56,848 basehttp "GET /tien-luong/4/ HTTP/1.1" 200 13127
+INFO 2025-05-13 22:48:07,192 basehttp "GET /tien-luong/ HTTP/1.1" 200 17319
+INFO 2025-05-13 22:52:36,966 autoreload D:\HK22425\HocKhac\btcd4\hr_management\payroll\templatetags\payroll_filters.py changed, reloading.
+INFO 2025-05-13 22:52:38,678 autoreload Watching for file changes with StatReloader
+INFO 2025-05-13 22:53:02,778 autoreload D:\HK22425\HocKhac\btcd4\hr_management\payroll\views.py changed, reloading.
+INFO 2025-05-13 22:53:05,305 autoreload Watching for file changes with StatReloader
+INFO 2025-05-13 22:53:42,968 autoreload D:\HK22425\HocKhac\btcd4\hr_management\payroll\views.py changed, reloading.
+INFO 2025-05-13 22:53:47,083 autoreload Watching for file changes with StatReloader
+INFO 2025-05-13 22:54:10,531 autoreload D:\HK22425\HocKhac\btcd4\hr_management\payroll\views.py changed, reloading.
+INFO 2025-05-13 22:54:12,315 autoreload Watching for file changes with StatReloader
+INFO 2025-05-13 22:54:25,892 autoreload D:\HK22425\HocKhac\btcd4\hr_management\employees\urls.py changed, reloading.
+INFO 2025-05-13 22:54:27,810 autoreload Watching for file changes with StatReloader
+INFO 2025-05-13 22:55:39,218 autoreload D:\HK22425\HocKhac\btcd4\hr_management\employees\urls.py changed, reloading.
+INFO 2025-05-13 22:55:43,085 autoreload Watching for file changes with StatReloader
+INFO 2025-05-13 22:57:21,474 autoreload D:\HK22425\HocKhac\btcd4\hr_management\employees\views.py changed, reloading.
+INFO 2025-05-13 22:57:23,066 autoreload Watching for file changes with StatReloader
+INFO 2025-05-13 22:57:41,870 autoreload D:\HK22425\HocKhac\btcd4\hr_management\employees\views.py changed, reloading.
+INFO 2025-05-13 22:57:44,781 autoreload Watching for file changes with StatReloader
+INFO 2025-05-13 22:59:08,698 autoreload D:\HK22425\HocKhac\btcd4\hr_management\employees\models.py changed, reloading.
+INFO 2025-05-13 22:59:10,258 autoreload Watching for file changes with StatReloader
+INFO 2025-05-13 22:59:19,569 autoreload D:\HK22425\HocKhac\btcd4\hr_management\employees\admin.py changed, reloading.
+INFO 2025-05-13 22:59:20,904 autoreload Watching for file changes with StatReloader
+INFO 2025-05-13 22:59:36,254 autoreload D:\HK22425\HocKhac\btcd4\hr_management\employees\admin.py changed, reloading.
+INFO 2025-05-13 22:59:37,735 autoreload Watching for file changes with StatReloader
+INFO 2025-05-13 23:03:04,093 autoreload D:\HK22425\HocKhac\btcd4\hr_management\employees\models.py changed, reloading.
+INFO 2025-05-13 23:03:05,765 autoreload Watching for file changes with StatReloader
+INFO 2025-05-13 23:03:24,026 autoreload D:\HK22425\HocKhac\btcd4\hr_management\payroll\models.py changed, reloading.
+INFO 2025-05-13 23:03:26,215 autoreload Watching for file changes with StatReloader
+INFO 2025-05-13 23:03:37,925 autoreload D:\HK22425\HocKhac\btcd4\hr_management\attendance\models.py changed, reloading.
+INFO 2025-05-13 23:03:39,765 autoreload Watching for file changes with StatReloader
+INFO 2025-05-13 23:05:15,308 autoreload D:\HK22425\HocKhac\btcd4\hr_management\employees\forms.py changed, reloading.
+INFO 2025-05-13 23:05:16,734 autoreload Watching for file changes with StatReloader
+INFO 2025-05-13 23:05:33,285 autoreload D:\HK22425\HocKhac\btcd4\hr_management\payroll\forms.py changed, reloading.
+INFO 2025-05-13 23:05:35,177 autoreload Watching for file changes with StatReloader
+INFO 2025-05-13 23:05:53,731 autoreload D:\HK22425\HocKhac\btcd4\hr_management\employees\views.py changed, reloading.
+INFO 2025-05-13 23:05:56,580 autoreload Watching for file changes with StatReloader
+INFO 2025-05-13 23:09:56,590 autoreload D:\HK22425\HocKhac\btcd4\hr_management\employees\admin.py changed, reloading.
+INFO 2025-05-13 23:09:58,225 autoreload Watching for file changes with StatReloader
+INFO 2025-05-13 23:10:12,504 autoreload D:\HK22425\HocKhac\btcd4\hr_management\attendance\admin.py changed, reloading.
+INFO 2025-05-13 23:10:14,256 autoreload Watching for file changes with StatReloader
+INFO 2025-05-13 23:10:28,845 autoreload D:\HK22425\HocKhac\btcd4\hr_management\payroll\admin.py changed, reloading.
+INFO 2025-05-13 23:10:30,468 autoreload Watching for file changes with StatReloader
+INFO 2025-05-13 23:10:51,054 autoreload D:\HK22425\HocKhac\btcd4\hr_management\hr_management\urls.py changed, reloading.
+INFO 2025-05-13 23:10:52,790 autoreload Watching for file changes with StatReloader

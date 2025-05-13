@@ -1,0 +1,244 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}Chi tiết lương nhân viên - Ms.Vy English HR Management{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="h3">Chi tiết lương nhân viên</h1>
+    <div class="d-flex gap-2">
+        <a href="{% url 'payroll_detail' payroll.id %}" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left me-2"></i>Quay lại
+        </a>
+        <button class="btn btn-primary" onclick="window.print()">
+            <i class="bi bi-printer me-2"></i>In phiếu lương
+        </button>
+    </div>
+</div>
+
+<!-- Thông tin nhân viên -->
+<div class="card mb-4">
+    <div class="card-header">
+        <h5 class="card-title mb-0">Thông tin nhân viên</h5>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-3 mb-3">
+                <h6 class="text-muted mb-1">Mã nhân viên</h6>
+                <p class="fw-medium">{{ detail.employee.code }}</p>
+            </div>
+            <div class="col-md-3 mb-3">
+                <h6 class="text-muted mb-1">Họ và tên</h6>
+                <p class="fw-medium">{{ detail.employee.full_name }}</p>
+            </div>
+            <div class="col-md-3 mb-3">
+                <h6 class="text-muted mb-1">Vị trí</h6>
+                <p class="fw-medium">{{ detail.employee.position.name }}</p>
+            </div>
+            <div class="col-md-3 mb-3">
+                <h6 class="text-muted mb-1">Mã số thuế</h6>
+                <p class="fw-medium">{{ detail.employee.tax_code|default:"Chưa cập nhật" }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Thông tin lương -->
+<div class="row mb-4">
+    <div class="col-md-6 mb-4 mb-md-0">
+        <div class="card h-100">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Thông tin lương cơ bản</h5>
+            </div>
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+                    <span class="text-muted">Lương cơ bản</span>
+                    <span class="fw-medium">{{ detail.basic_salary|floatformat:0|intcomma }} VNĐ</span>
+                </div>
+                <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+                    <span class="text-muted">Số công chuẩn</span>
+                    <span class="fw-medium">{{ detail.standard_workdays }} ngày</span>
+                </div>
+                <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+                    <span class="text-muted">Số công thực tế</span>
+                    <span class="fw-medium">{{ detail.actual_workdays }} ngày</span>
+                </div>
+                <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+                    <span class="text-muted">Số ngày nghỉ không lương</span>
+                    <span class="fw-medium">{{ detail.unpaid_leave }} ngày</span>
+                </div>
+                <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+                    <span class="text-muted">Tỷ lệ hưởng lương</span>
+                    <span class="fw-medium">{{ detail.attendance_ratio|floatformat:2 }}</span>
+                </div>
+                <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+                    <span class="text-muted fw-medium">Lương theo ngày công</span>
+                    <span class="fw-medium">{{ detail.gross_salary|floatformat:0|intcomma }} VNĐ</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card h-100">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Tổng hợp thu nhập</h5>
+            </div>
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+                    <span class="text-muted">Lương theo ngày công</span>
+                    <span class="fw-medium">{{ detail.gross_salary|floatformat:0|intcomma }} VNĐ</span>
+                </div>
+
+                <!-- Phụ cấp -->
+                {% if allowances %}
+                <div class="py-2">
+                    <h6 class="text-muted mb-2">Phụ cấp</h6>
+                    {% for allowance in allowances %}
+                    <div class="d-flex justify-content-between align-items-center py-1 ps-4 border-bottom">
+                        <span class="text-muted">
+                            {{ allowance.name }}
+                            {% if allowance.is_percentage %}({{ allowance.amount }}%){% endif %}
+                        </span>
+                        <span class="fw-medium">{{ allowance.value|floatformat:0|intcomma }} VNĐ</span>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <!-- Khen thưởng -->
+                {% if detail.reward_amount > 0 %}
+                <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+                    <span class="text-muted">Tiền thưởng</span>
+                    <span class="fw-medium text-success">{{ detail.reward_amount|floatformat:0|intcomma }} VNĐ</span>
+                </div>
+                {% endif %}
+
+                <!-- Tổng thu nhập -->
+                <div class="d-flex justify-content-between align-items-center py-2 border-bottom bg-light">
+                    <span class="text-dark fw-medium">Tổng thu nhập</span>
+                    <span class="fw-bold">
+                        {% with total_allowances=0 %}
+                            {% for allowance in allowances %}
+                                {% with total_allowances=total_allowances|add:allowance.value %}{% endwith %}
+                            {% endfor %}
+                            {{ detail.gross_salary|add:total_allowances|add:detail.reward_amount|floatformat:0|intcomma }} VNĐ
+                        {% endwith %}
+                    </span>
+                </div>
+
+                <!-- Thuế TNCN -->
+                <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+                    <span class="text-muted">Thuế TNCN</span>
+                    <span class="fw-medium text-danger">-{{ detail.income_tax|floatformat:0|intcomma }} VNĐ</span>
+                </div>
+
+                <!-- Kỷ luật -->
+                {% if detail.discipline_amount > 0 %}
+                <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+                    <span class="text-muted">Tiền phạt kỷ luật</span>
+                    <span class="fw-medium text-danger">-{{ detail.discipline_amount|floatformat:0|intcomma }} VNĐ</span>
+                </div>
+                {% endif %}
+
+                <!-- Khấu trừ -->
+                {% if deductions %}
+                <div class="py-2">
+                    <h6 class="text-muted mb-2">Khấu trừ khác</h6>
+                    {% for deduction in deductions %}
+                    <div class="d-flex justify-content-between align-items-center py-1 ps-4 border-bottom">
+                        <span class="text-muted">
+                            {{ deduction.name }}
+                            {% if deduction.is_percentage %}({{ deduction.amount }}%){% endif %}
+                        </span>
+                        <span class="fw-medium text-danger">-{{ deduction.value|floatformat:0|intcomma }} VNĐ</span>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <!-- Tổng khấu trừ -->
+                <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+                    <span class="text-muted fw-medium">Tổng khấu trừ</span>
+                    <span class="fw-medium text-danger">-{{ detail.income_tax|add:detail.discipline_amount|add:detail.deduction_amount|floatformat:0|intcomma }} VNĐ</span>
+                </div>
+
+                <!-- Thực lĩnh -->
+                <div class="d-flex justify-content-between align-items-center py-3 bg-primary bg-opacity-10 rounded px-3 mt-2">
+                    <span class="text-primary fw-medium">Thực lĩnh</span>
+                    <span class="fw-bold text-primary">{{ detail.net_salary|floatformat:0|intcomma }} VNĐ</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Thông tin thuế TNCN -->
+<div class="card mb-4">
+    <div class="card-header">
+        <h5 class="card-title mb-0">Chi tiết tính thuế TNCN</h5>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <table class="table">
+                    <tr>
+                        <th style="width: 250px;">Tổng thu nhập:</th>
+                        <td>{{ detail.gross_salary|add:detail.reward_amount|floatformat:0|intcomma }} VNĐ</td>
+                    </tr>
+                    <tr>
+                        <th>Giảm trừ gia cảnh bản thân:</th>
+                        <td>11,000,000 VNĐ</td>
+                    </tr>
+                    <tr>
+                        <th>Số người phụ thuộc:</th>
+                        <td>{{ detail.employee.dependents }} người</td>
+                    </tr>
+                    <tr>
+                        <th>Giảm trừ người phụ thuộc:</th>
+                        <td>{{ detail.employee.dependents|multiply:4400000|floatformat:0|intcomma }} VNĐ</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-6">
+                <table class="table">
+                    <tr>
+                        <th style="width: 250px;">Thu nhập tính thuế:</th>
+                        <td>{{ detail.taxable_income|floatformat:0|intcomma }} VNĐ</td>
+                    </tr>
+                    <tr>
+                        <th>Thuế suất áp dụng:</th>
+                        <td>Biểu thuế lũy tiến từng phần</td>
+                    </tr>
+                    <tr class="table-primary">
+                        <th>Thuế TNCN phải nộp:</th>
+                        <td>{{ detail.income_tax|floatformat:0|intcomma }} VNĐ</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Ghi chú -->
+{% if detail.note %}
+<div class="card">
+    <div class="card-header">
+        <h5 class="card-title mb-0">Ghi chú</h5>
+    </div>
+    <div class="card-body">
+        <p>{{ detail.note }}</p>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Hàm nhân số với 100 để hiển thị phần trăm
+    function multiply(value, arg) {
+        return value * arg;
+    }
+</script>
+{% endblock %}

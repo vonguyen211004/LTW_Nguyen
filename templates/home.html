@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Trang chủ - Ms.Vy English HR Management{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Animation for home page cards only */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .home-card {
+        animation: fadeInUp 0.5s ease-out forwards;
+        transform: translateY(0); /* Ensure final state is normal */
+    }
+
+    .home-card:nth-child(1) {
+        animation-delay: 0.1s;
+    }
+    .home-card:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+    .home-card:nth-child(3) {
+        animation-delay: 0.3s;
+    }
+
+    /* Add hover effect for home cards */
+    .home-card:hover {
+        transform: translateY(-5px);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8 mx-auto text-center">
+                <h1 class="display-4">Hệ thống Quản lý Nhân sự</h1>
+                <p class="lead mb-4">Chào mừng đến với hệ thống quản lý nhân sự của trung tâm Anh ngữ Ms.Vy English</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Các chức năng chính -->
+    <div class="row">
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card h-100 shadow-sm home-card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="rounded-circle p-3 me-3" style="background-color: rgba(41, 128, 185, 0.1);">
+                            <i class="bi bi-people fs-4" style="color: var(--primary-color);"></i>
+                        </div>
+                        <h5 class="card-title mb-0 fw-bold">Quản lý Nhân viên</h5>
+                    </div>
+                    <p class="card-text">Quản lý thông tin nhân viên, hợp đồng và các dữ liệu liên quan. Theo dõi quá trình làm việc và phát triển của nhân viên.</p>
+                    <div class="d-grid gap-2">
+                        <a href="{% url 'employee_list' %}" class="btn btn-primary">
+                            <i class="bi bi-arrow-right-circle me-2"></i>Truy cập
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card h-100 shadow-sm home-card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="rounded-circle p-3 me-3" style="background-color: rgba(39, 174, 96, 0.1);">
+                            <i class="bi bi-calendar-check fs-4 text-success"></i>
+                        </div>
+                        <h5 class="card-title mb-0 fw-bold">Chấm công</h5>
+                    </div>
+                    <p class="card-text">Quản lý ca làm việc, bảng chấm công và dữ liệu chấm công. Theo dõi giờ làm việc và tạo báo cáo chấm công.</p>
+                    <div class="d-grid gap-2">
+                        <a href="{% url 'attendance_dashboard' %}" class="btn btn-success">
+                            <i class="bi bi-arrow-right-circle me-2"></i>Truy cập
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card h-100 shadow-sm home-card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="rounded-circle p-3 me-3" style="background-color: rgba(243, 156, 18, 0.1);">
+                            <i class="bi bi-cash-coin fs-4 text-warning"></i>
+                        </div>
+                        <h5 class="card-title mb-0 fw-bold">Tiền lương</h5>
+                    </div>
+                    <p class="card-text">Quản lý mẫu bảng lương, tính lương và chi trả lương. Tạo báo cáo lương,xuất bảng lương và quản lý các khoản phụ cấp.</p>
+                    <div class="d-grid gap-2">
+                        <a href="{% url 'payroll_list' %}" class="btn btn-warning text-white">
+                            <i class="bi bi-arrow-right-circle me-2"></i>Truy cập
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

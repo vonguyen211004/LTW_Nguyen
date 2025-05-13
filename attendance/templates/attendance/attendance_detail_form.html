@@ -1,0 +1,182 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Thêm bảng chấm công chi tiết - Ms.Vy English
+{% endblock %}
+
+{% block module_sidebar %}
+<ul class="nav flex-column">
+    <li class="nav-item">
+        <a class="nav-link {% if 'work-shifts' in request.path %}active{% endif %}" href="{% url 'work_shift_list' %}">
+            <i class="bi bi-calendar-check me-2"></i> Ca làm việc
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link {% if request.path == '/attendance-details/' %}active{% endif %}" href="{% url 'attendance_detail_list' %}">
+            <i class="bi bi-list-check me-2"></i> Bảng chấm công chi tiết
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link {% if request.path == '/attendance-summary/' %}active{% endif %}" href="{% url 'attendance_summary' %}">
+            <i class="bi bi-bar-chart me-2"></i> Bảng chấm công tổng hợp
+        </a>
+    </li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>{% if attendance_record %}Cập nhật bảng chấm công chi tiết{% else %}Thêm mới bảng chấm công chi tiết{% endif %}</h2>
+    <a href="{% url 'attendance_detail_list' %}" class="btn btn-secondary">
+        <i class="bi bi-arrow-left me-1"></i> Quay lại
+    </a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <form method="POST" id="attendance_form">
+            {% csrf_token %}
+            <div class="mb-4">
+                <h4 class="text-primary mb-3">THÔNG TIN BẢNG CHẤM CÔNG</h4>
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <label class="form-label">Thời gian <span class="text-danger">*</span></label>
+                        <div class="d-flex gap-3 align-items-center">
+                            <select class="form-control" style="max-width: 200px;" onchange="setDateRange(this.value)">
+                                <option value="">Chọn khoảng thời gian</option>
+                                <option value="current_month">Tháng này</option>
+                                <option value="last_month">Tháng trước</option>
+                            </select>
+                            <div class="d-flex gap-2">
+                                <input type="date" name="start_date" id="start_date" class="form-control" value="{{ attendance_record.start_date|default_if_none:'' }}" required>
+                                <input type="date" name="end_date" id="end_date" class="form-control" value="{{ attendance_record.end_date|default_if_none:'' }}" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <label class="form-label">Hình thức chấm công <span class="text-danger">*</span></label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="attendance_type" id="attendance_type_shift" value="shift" {% if attendance_record.attendance_type == 'shift' or not attendance_record %}checked{% endif %}>
+                            <label class="form-check-label" for="attendance_type_shift">Theo ca</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="attendance_type" id="attendance_type_daily" value="daily" {% if attendance_record.attendance_type == 'daily' %}checked{% endif %}>
+                            <label class="form-check-label" for="attendance_type_daily">Theo ngày</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <label for="name" class="form-label">Tên bảng chấm công <span class="text-danger">*</span></label>
+                        <input type="text" name="name" id="name" class="form-control" value="{{ attendance_record.name|default_if_none:'Bảng chấm công từ ngày 01/04/2025 đến ngày 30/04/2025' }}" required>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <label for="positions" class="form-label">Vị trí áp dụng <span class="text-danger">*</span></label>
+                        <select name="positions" id="positions" class="form-control" required>
+                            <option value="" disabled {% if not attendance_record %}selected{% endif %}>Chọn vị trí áp dụng</option>
+                            {% for position in positions %}
+                            <option value="{{ position.id }}" {% if position in attendance_record.positions.all %}selected{% endif %}>
+                                {{ position.name }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <label class="form-label">Ca làm việc <span class="text-danger">*</span></label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="apply_to_all_shifts" id="apply_to_all_shifts" {% if attendance_record.apply_to_all_shifts %}checked{% endif %} onchange="toggleWorkShifts()">
+                            <label class="form-check-label" for="apply_to_all_shifts">Chọn tất cả ca</label>
+                        </div>
+                        <div class="mt-2" id="work_shifts_section">
+                            <select name="work_shifts" id="work_shifts" class="form-control" multiple required>
+                                {% for shift in work_shifts %}
+                                <option value="{{ shift.id }}" {% if shift in attendance_record.work_shifts.all %}selected{% endif %}>
+                                    {{ shift.name }} ({{ shift.start_time }} - {{ shift.end_time }})
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-save me-1"></i> Lưu
+                </button>
+                <a href="{% url 'attendance_detail_list' %}" class="btn btn-secondary">
+                    <i class="bi bi-x-circle me-1"></i> Hủy
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+function setDateRange(option) {
+    const today = new Date();
+    let firstDay, lastDay;
+
+    if (option === "current_month") {
+        firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
+        lastDay = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+    } else if (option === "last_month") {
+        firstDay = new Date(today.getFullYear(), today.getMonth() - 1, 1);
+        lastDay = new Date(today.getFullYear(), today.getMonth(), 0);
+    } else {
+        return;
+    }
+
+    const formatDate = (date) => {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    };
+
+    document.getElementById('start_date').value = formatDate(firstDay);
+    document.getElementById('end_date').value = formatDate(lastDay);
+    updateTableName();
+}
+
+function updateTableName() {
+    const startDate = document.getElementById('start_date').value;
+    const endDate = document.getElementById('end_date').value;
+
+    if (startDate && endDate) {
+        const formatDate = (dateStr) => {
+            const date = new Date(dateStr);
+            const day = String(date.getDate()).padStart(2, '0');
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const year = date.getFullYear();
+            return `${day}/${month}/${year}`;
+        };
+
+        const nameField = document.getElementById('name');
+        nameField.value = `Bảng chấm công từ ngày ${formatDate(startDate)} đến ngày ${formatDate(endDate)}`;
+    }
+}
+
+function toggleWorkShifts() {
+    const applyToAllShifts = document.getElementById('apply_to_all_shifts').checked;
+    const workShiftsSection = document.getElementById('work_shifts_section');
+    workShiftsSection.style.display = applyToAllShifts ? 'none' : 'block';
+    if (applyToAllShifts) {
+        workShiftsSection.querySelector('select').removeAttribute('required');
+    } else {
+        workShiftsSection.querySelector('select').setAttribute('required', '');
+    }
+}
+
+document.getElementById('start_date').addEventListener('change', updateTableName);
+document.getElementById('end_date').addEventListener('change', updateTableName);
+
+toggleWorkShifts();
+</script>
+{% endblock %}

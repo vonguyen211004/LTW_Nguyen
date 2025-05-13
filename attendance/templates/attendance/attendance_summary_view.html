@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Chi tiết bảng chấm công tổng hợp{% endblock %}
+
+{% block extra_css %}
+<style>
+    .table-responsive {
+        overflow-x: auto;
+    }
+    .badge-transferred {
+        background-color: #28a745;
+        color: white;
+    }
+    .badge-not-transferred {
+        background-color: #6c757d;
+        color: white;
+    }
+    #loading-message {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 20px;
+        border-radius: 5px;
+        z-index: 9999;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3">Chi tiết bảng chấm công tổng hợp</h1>
+        <div class="d-flex gap-2">
+            <a href="{% url 'attendance_summary' %}" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-left me-1"></i> Quay lại
+            </a>
+            {% if not attendance_summary.transferred %}
+            <a href="{% url 'transfer_to_payroll' summary_id=attendance_summary.id %}" class="btn btn-primary">
+                <i class="bi bi-arrow-right-circle me-1"></i> Chuyển tính lương
+            </a>
+            {% else %}
+            <button disabled class="btn btn-success">
+                <i class="bi bi-check-circle me-1"></i> Đã chuyển tính lương
+            </button>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="card-title mb-0">Thông tin bảng chấm công</h5>
+            <div id="status-badge-{{ attendance_summary.id }}">
+                {% if attendance_summary.transferred %}
+                <span class="badge bg-success">Đã chuyển</span>
+                {% else %}
+                <span class="badge bg-secondary">Chưa chuyển</span>
+                {% endif %}
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <p><strong>Tên bảng chấm công:</strong> {{ attendance_summary.name }}</p>
+                    <p><strong>Vị trí áp dụng:</strong> {{ attendance_summary.position.name }}</p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Số bảng chấm công chi tiết:</strong> {{ attendance_summary.attendance_records.count }}</p>
+                    <p><strong>Số công chuẩn:</strong> <span id="standard-workdays">{{ employee_data.0.standard_work_days|default:"0" }}</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title mb-0">Dữ liệu chấm công nhân viên</h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th>STT</th>
+                            <th>Mã NV</th>
+                            <th>Họ tên</th>
+                            <th>Công chuẩn</th>
+                            <th>Công thực tế</th>
+                            <th>Nghỉ không lương</th>
+                            <th>Tỷ lệ hưởng</th>
+                            <th>Công ngày thường</th>
+                            <th>Công ngày nghỉ</th>
+                            <th>Đi muộn/về sớm (phút)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for data in employee_data %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ data.employee.employee_id|default:data.employee.id }}</td>
+                            <td>{{ data.employee.full_name }}</td>
+                            <td>{{ data.standard_work_days|floatformat:1 }}</td>
+                            <td>{{ data.actual_workdays|floatformat:1 }}</td>
+                            <td>{{ data.unpaid_leave|floatformat:1 }}</td>
+                            <td>{{ data.attendance_ratio|floatformat:2 }}</td>
+                            <td>{{ data.normal_work_days|floatformat:1 }}</td>
+                            <td>{{ data.rest_work_days|floatformat:1 }}</td>
+                            <td>{{ data.late_early_minutes }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="10" class="text-center py-4">
+                                <div class="text-muted">
+                                    <i class="bi bi-inbox fs-1 d-block mb-2"></i>
+                                    Không có dữ liệu chấm công
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

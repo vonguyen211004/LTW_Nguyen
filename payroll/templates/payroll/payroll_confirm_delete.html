@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Xác nhận xóa bảng lương{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h4 class="card-title mb-4 text-danger">
+                        <i class="bi bi-exclamation-triangle-fill me-2"></i>Xác nhận xóa bảng lương
+                    </h4>
+                    
+                    <p class="alert alert-warning">
+                        Bạn có chắc chắn muốn xóa bảng lương "<strong>{{ payroll.name }}</strong>"?
+                        <br>
+                        Hành động này không thể hoàn tác và tất cả dữ liệu liên quan sẽ bị xóa vĩnh viễn.
+                    </p>
+                    
+                    <div class="d-flex justify-content-between mt-4">
+                        <a href="{% url 'payroll_detail' pk=payroll.pk %}" class="btn btn-secondary">
+                            <i class="bi bi-arrow-left me-2"></i>Quay lại
+                        </a>
+                        
+                        <form method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">
+                                <i class="bi bi-trash me-2"></i>Xác nhận xóa
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
