@@ -1,19 +1,13 @@
 from django.contrib import admin
-from .models import AttendanceSummary, AttendanceRecord
+from .models import WorkShift, AttendanceRecord
 
-class AttendanceRecordInline(admin.TabularInline):
-    model = AttendanceRecord
-    extra = 0
-
-@admin.register(AttendanceSummary)
-class AttendanceSummaryAdmin(admin.ModelAdmin):
-    list_display = ('name', 'month', 'year', 'position', 'transferred', 'created_by')
-    list_filter = ('month', 'year', 'position', 'transferred')
-    search_fields = ('name',)
-    inlines = [AttendanceRecordInline]
+@admin.register(WorkShift)
+class WorkShiftAdmin(admin.ModelAdmin):
+    list_display = ('name', 'code', 'start_time', 'end_time')
+    search_fields = ('name', 'code')
 
 @admin.register(AttendanceRecord)
 class AttendanceRecordAdmin(admin.ModelAdmin):
-    list_display = ('employee', 'attendance_summary', 'standard_work_days', 'normal_work_days', 'rest_work_days', 'unpaid_leave')
-    list_filter = ('attendance_summary',)
-    search_fields = ('employee__first_name', 'employee__last_name')
+    list_display = ('name', 'start_date', 'end_date', 'attendance_type')
+    list_filter = ('start_date', 'end_date', 'attendance_type')
+    search_fields = ('name',)

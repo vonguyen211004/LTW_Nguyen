@@ -4,22 +4,26 @@ from .models import Payroll, PayrollDetail, PayrollAllowance, PayrollDeduction
 class PayrollForm(forms.ModelForm):
     class Meta:
         model = Payroll
-        fields = ['name', 'month', 'year', 'position', 'note']
+        fields = ['name', 'month', 'year', 'position' , 'attendance_summary', 'status']
         widgets = {
-            'note': forms.Textarea(attrs={'rows': 3}),
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'month': forms.NumberInput(attrs={'class': 'form-control', 'min': 1, 'max': 12}),
+            'year': forms.NumberInput(attrs={'class': 'form-control', 'min': 2000, 'max': 2100}),
+            'position': forms.Select(attrs={'class': 'form-control'}),
+            'attendance_summary': forms.Select(attrs={'class': 'form-control'}),
         }
+
 
 class PayrollDetailForm(forms.ModelForm):
     class Meta:
         model = PayrollDetail
         fields = [
             'basic_salary', 'standard_workdays', 'actual_workdays',
-            'unpaid_leave', 'attendance_ratio', 'discipline_amount',
-            'reward_amount', 'deduction_amount', 'note'
+            'unpaid_leave',
+
         ]
-        widgets = {
-            'note': forms.Textarea(attrs={'rows': 3}),
-        }
+
+
 
 class PayrollAllowanceForm(forms.ModelForm):
     class Meta:

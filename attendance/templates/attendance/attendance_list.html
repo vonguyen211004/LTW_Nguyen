@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Danh sách bảng chấm công tổng hợp{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Danh sách bảng chấm công tổng hợp</h1>
+        <a href="{% url 'attendance_create' %}" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Tạo bảng chấm công mới
+        </a>
+    </div>
+
+    <!-- Danh sách bảng chấm công -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Danh sách bảng chấm công tổng hợp</h6>
+        </div>
+        <div class="card-body">
+            {% if page_obj %}
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Tên bảng chấm công</th>
+                                <th>Vị trí</th>
+                                <th>Tháng/Năm</th>
+                                <th>Trạng thái</th>
+                                <th>Ngày tạo</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for summary in page_obj %}
+                                <tr>
+                                    <td>{{ summary.name }}</td>
+                                    <td>{{ summary.position.name }}</td>
+                                    <td>{{ summary.month }}/{{ summary.year }}</td>
+                                    <td>
+                                        {% if summary.transferred %}
+                                            <span class="badge badge-success">Đã chuyển tính lương</span>
+                                        {% else %}
+                                            <span class="badge badge-warning">Chưa chuyển tính lương</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ summary.created_at|date:"d/m/Y H:i" }}</td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <a href="{% url 'attendance_summary_view' id=summary.id %}" class="btn btn-sm btn-info">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            <a href="{% url 'attendance_summary_edit' id=summary.id %}" class="btn btn-sm btn-warning">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <a href="{% url 'attendance_summary_delete' id=summary.id %}" class="btn btn-sm btn-danger">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                            {% if not summary.transferred %}
+                                                <a href="{% url 'transfer_to_payroll' summary_id=summary.id %}" class="btn btn-sm btn-primary">
+                                                    <i class="fas fa-exchange-alt"></i>
+                                                </a>
+                                            {% endif %}
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Phân trang -->
+                {% if page_obj.has_other_pages %}
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-center">
+                            {% if page_obj.has_previous %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page=1" aria-label="First">
+                                        <span aria-hidden="true">&laquo;&laquo;</span>
+                                    </a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                            {% endif %}
+                            
+                            {% for num in page_obj.paginator.page_range %}
+                                {% if page_obj.number == num %}
+                                    <li class="page-item active">
+                                        <span class="page-link">{{ num }}</span>
+                                    </li>
+                                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                            
+                            {% if page_obj.has_next %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}" aria-label="Last">
+                                        <span aria-hidden="true">&raquo;&raquo;</span>
+                                    </a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                {% endif %}
+            {% else %}
+                <div class="text-center py-5">
+                    <i class="fas fa-calendar-alt fa-4x mb-3 text-gray-300"></i>
+                    <p class="lead">Không có bảng chấm công tổng hợp nào</p>
+                    <a href="{% url 'attendance_create' %}" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Tạo bảng chấm công mới
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

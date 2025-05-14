@@ -1,149 +1,192 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.utils.translation import gettext_lazy as _
 from employees.models import Employee, Position
+from attendance.models import AttendanceSummary
+from django.utils import timezone
 from decimal import Decimal
-
-
+from django.contrib.auth.models import User
 class Payroll(models.Model):
-	STATUS_CHOICES = [
-		('draft', 'Nháp'),
-		('processing', 'Đang xử lý'),
-		('approved', 'Đã duyệt'),
-		('paid', 'Đã thanh toán'),
-		('disabled', 'Đã vô hiệu hóa'),
-	]
+	attendance_summary = models.ForeignKey(
+		AttendanceSummary,
+		on_delete=models.SET_NULL,
+		null=True,
+		blank=True,
+		related_name='payrolls',
+		verbose_name="Bảng chấm công"
+	)
+	user = models.ForeignKey(User, on_delete=models.CASCADE)
+	name = models.CharField(max_length=200, verbose_name="Tên bảng lương")
+	code = models.CharField(max_length=50, blank=True, null=True, verbose_name="Mã bảng lương")
+	# Thêm các trường month và year nếu chưa có
+	month = models.IntegerField(verbose_name="Tháng", default=timezone.now().month)
+	year = models.IntegerField(verbose_name="Năm", default=timezone.now().year)
+	position = models.ForeignKey(Position, on_delete=models.CASCADE, verbose_name="Vị trí")
+	status = models.CharField(
+		max_length=20,
+		choices=[
+			('draft', 'Nháp'),
+			('processing', 'Đang xử lý'),
+			('approved', 'Đã duyệt'),
+			('paid', 'Đã thanh toán')
+		],
+		default='draft',
+		verbose_name="Trạng thái"
+	)
+	created_at = models.DateTimeField(auto_now_add=True, verbose_name="Ngày tạo")
+	updated_at = models.DateTimeField(auto_now=True, verbose_name="Ngày cập nhật")
+	created_by = models.ForeignKey('auth.User', on_delete=models.SET_NULL, null=True, related_name='created_payrolls',
+	                               verbose_name="Người tạo")
 
-	name = models.CharField(max_length=100, verbose_name='Tên bảng lương')
-	month = models.PositiveIntegerField(verbose_name='Tháng', null=True)
-	year = models.PositiveIntegerField(verbose_name='Năm', null=True)
-	position = models.ForeignKey(Position, on_delete=models.PROTECT, related_name='payrolls', verbose_name='Vị trí')
-	status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='draft', verbose_name='Trạng thái')
-	note = models.TextField(blank=True, null=True, verbose_name='Ghi chú')
-	created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='created_payrolls')
-	created_at = models.DateTimeField(auto_now_add=True)
-	updated_at = models.DateTimeField(auto_now=True)
 
 	class Meta:
-		verbose_name = 'Bảng lương'
-		verbose_name_plural = 'Bảng lương'
-		ordering = ['-year', '-month']
-		unique_together = ['month', 'year', 'position']
+		verbose_name = "Bảng lương"
+		verbose_name_plural = "Bảng lương"
+		ordering = ['-created_at']
 
 	def __str__(self):
-		return f"Bảng lương {self.position.name} - {self.month}/{self.year}"
-
-	@property
-	def total_gross_salary(self):
-		"""Tổng thu nhập trước thuế"""
-		return sum(detail.gross_salary for detail in self.payroll_details.all())
-
-	@property
-	def total_net_salary(self):
-		"""Tổng thực lĩnh"""
-		return sum(detail.net_salary for detail in self.payroll_details.all())
-
-	@property
-	def total_income_tax(self):
-		"""Tổng thuế TNCN"""
-		return sum(detail.income_tax for detail in self.payroll_details.all())
-
-	@property
-	def total_discipline_amount(self):
-		"""Tổng tiền phạt kỷ luật"""
-		return sum(detail.discipline_amount for detail in self.payroll_details.all())
-
-	@property
-	def total_reward_amount(self):
-		"""Tổng tiền khen thưởng"""
-		return sum(detail.reward_amount for detail in self.payroll_details.all())
+		return self.name
 
 
 class PayrollDetail(models.Model):
-	payroll = models.ForeignKey(Payroll, on_delete=models.CASCADE, related_name='payroll_details')
-	employee = models.ForeignKey(Employee, on_delete=models.PROTECT, related_name='payroll_details')
-	basic_salary = models.DecimalField(max_digits=12, decimal_places=0, verbose_name='Lương cơ bản')
-	standard_workdays = models.DecimalField(max_digits=5, decimal_places=1, verbose_name='Công chuẩn')
-	actual_workdays = models.DecimalField(max_digits=5, decimal_places=1, verbose_name='Công thực tế')
-	unpaid_leave = models.DecimalField(max_digits=5, decimal_places=1, default=0, verbose_name='Nghỉ không lương')
-	attendance_ratio = models.DecimalField(max_digits=5, decimal_places=2, verbose_name='Tỷ lệ hưởng')
-	gross_salary = models.DecimalField(max_digits=12, decimal_places=0, verbose_name='Tổng thu nhập')
-	taxable_income = models.DecimalField(max_digits=12, decimal_places=0, verbose_name='Thu nhập tính thuế')
-	income_tax = models.DecimalField(max_digits=12, decimal_places=0, verbose_name='Thuế TNCN')
-	discipline_amount = models.DecimalField(max_digits=12, decimal_places=0, default=0,
-	                                        verbose_name='Tiền phạt kỷ luật')
-	reward_amount = models.DecimalField(max_digits=12, decimal_places=0, default=0, verbose_name='Tiền khen thưởng')
-	deduction_amount = models.DecimalField(max_digits=12, decimal_places=0, default=0, verbose_name='Khấu trừ khác')
-	net_salary = models.DecimalField(max_digits=12, decimal_places=0, verbose_name='Thực lĩnh')
-	note = models.TextField(blank=True, null=True, verbose_name='Ghi chú')
-	created_at = models.DateTimeField(auto_now_add=True)
-	updated_at = models.DateTimeField(auto_now=True)
-
-	class Meta:
-		verbose_name = 'Chi tiết lương'
-		verbose_name_plural = 'Chi tiết lương'
-		ordering = ['employee__last_name', 'employee__first_name']
-		unique_together = ['payroll', 'employee']
+	payroll = models.ForeignKey(
+		Payroll,
+		on_delete=models.CASCADE,
+		related_name='details',
+		verbose_name=_("Bảng lương")
+	)
+	employee = models.ForeignKey(
+		Employee,
+		on_delete=models.CASCADE,
+		verbose_name=_("Nhân viên")
+	)
+	basic_salary = models.DecimalField(
+		_("Lương cơ bản"),
+		max_digits=12,
+		decimal_places=0,
+		default=0
+	)
+	attendance_ratio = models.DecimalField(max_digits=5, decimal_places=4, default=Decimal('1.0000'),
+	                                       verbose_name="Tỷ lệ hưởng lương")
+	standard_workdays = models.FloatField(
+		_("Số công chuẩn"),
+		default=0.0
+	)
+	actual_workdays = models.FloatField(
+		_("Số công thực tế"),
+		default=0.0
+	)
+	unpaid_leave = models.FloatField(
+		_("Số ngày nghỉ không lương"),
+		default=0.0
+	)
+	# Thêm các trường bị thiếu
+	reward_amount = models.DecimalField(
+		_("Tiền thưởng"),
+		max_digits=12,
+		decimal_places=0,
+		default=0
+	)
+	discipline_amount = models.DecimalField(
+		_("Tiền phạt"),
+		max_digits=12,
+		decimal_places=0,
+		default=0
+	)
+	gross_salary = models.DecimalField(
+		_("Tổng thu nhập"),
+		max_digits=12,
+		decimal_places=0,
+		default=0
+	)
+	deduction_amount = models.DecimalField(
+		_("Tổng khấu trừ"),
+		max_digits=12,
+		decimal_places=0,
+		default=0
+	)
+	net_salary = models.DecimalField(
+		_("Thực lĩnh"),
+		max_digits=12,
+		decimal_places=0,
+		default=0
+	)
+	# Thêm trường income_tax nếu chưa có
+	income_tax = models.DecimalField(
+		_("Thuế TNCN"),
+		max_digits=12,
+		decimal_places=0,
+		default=0
+	)
+	note = models.TextField(_("Ghi chú"), blank=True, null=True)
+	# Thêm trường để lưu thông tin khấu trừ dưới dạng JSON
+	deduction_data = models.JSONField(default=dict, blank=True, null=True, verbose_name="Dữ liệu khấu trừ")
 
 	def __str__(self):
 		return f"{self.employee.full_name} - {self.payroll.name}"
 
+	class Meta:
+		verbose_name = _("Chi tiết lương")
+		verbose_name_plural = _("Chi tiết lương")
+		unique_together = ('payroll', 'employee')
+
 	def save(self, *args, **kwargs):
-		# Tính lương theo ngày công
-		self.gross_salary = (self.basic_salary * self.attendance_ratio).quantize(Decimal('0'))
-
-		# Tính thuế TNCN
-		self.taxable_income = self.employee.calculate_taxable_income(self.gross_salary + self.reward_amount)
-		self.income_tax = self.employee.calculate_income_tax(self.gross_salary + self.reward_amount)
-
-		# Tính lương thực lĩnh
-		self.net_salary = (
-					self.gross_salary + self.reward_amount - self.income_tax - self.discipline_amount - self.deduction_amount).quantize(
-			Decimal('0'))
-
+		# Đảm bảo net_salary được tính đúng trước khi lưu
+		if self.gross_salary and self.deduction_amount:
+			# Tính lương thực lĩnh = tổng thu nhập - khấu trừ + thưởng - phạt
+			self.net_salary = (
+					self.gross_salary -
+					self.deduction_amount -
+					self.income_tax +
+					self.reward_amount -
+					self.discipline_amount
+			)
 		super().save(*args, **kwargs)
 
 
 class PayrollAllowance(models.Model):
-	"""Phụ cấp trong bảng lương"""
-	payroll_detail = models.ForeignKey(PayrollDetail, on_delete=models.CASCADE, related_name='allowances')
-	name = models.CharField(max_length=100, verbose_name='Tên phụ cấp')
-	amount = models.DecimalField(max_digits=12, decimal_places=0, verbose_name='Số tiền/Tỷ lệ')
-	is_percentage = models.BooleanField(default=False, verbose_name='Là phần trăm')
-	value = models.DecimalField(max_digits=12, decimal_places=0, verbose_name='Giá trị')
-
-	class Meta:
-		verbose_name = 'Phụ cấp'
-		verbose_name_plural = 'Phụ cấp'
+	payroll_detail = models.ForeignKey(
+		PayrollDetail,
+		on_delete=models.CASCADE,
+		related_name='allowances',
+		verbose_name=_("Chi tiết lương")
+	)
+	name = models.CharField(_("Tên phụ cấp"), max_length=100)
+	amount = models.FloatField(_("Giá trị"), default=0.0)
+	is_percentage = models.BooleanField(_("Là phần trăm"), default=False)
+	value = models.DecimalField(
+		_("Số tiền"),
+		max_digits=12,
+		decimal_places=0,
+		default=0
+	)
 
 	def __str__(self):
 		return f"{self.name} - {self.payroll_detail.employee.full_name}"
 
-	def save(self, *args, **kwargs):
-		if self.is_percentage:
-			self.value = (self.payroll_detail.gross_salary * self.amount / 100).quantize(Decimal('0'))
-		else:
-			self.value = self.amount
-		super().save(*args, **kwargs)
-
+	class Meta:
+		verbose_name = _("Phụ cấp")
+		verbose_name_plural = _("Phụ cấp")
 
 class PayrollDeduction(models.Model):
-	"""Khấu trừ trong bảng lương"""
-	payroll_detail = models.ForeignKey(PayrollDetail, on_delete=models.CASCADE, related_name='deductions')
-	name = models.CharField(max_length=100, verbose_name='Tên khấu trừ')
-	amount = models.DecimalField(max_digits=12, decimal_places=0, verbose_name='Số tiền/Tỷ lệ')
-	is_percentage = models.BooleanField(default=False, verbose_name='Là phần trăm')
-	value = models.DecimalField(max_digits=12, decimal_places=0, verbose_name='Giá trị')
+    payroll_detail = models.ForeignKey(
+        PayrollDetail,
+        on_delete=models.CASCADE,
+        related_name='deductions',
+        verbose_name=_("Chi tiết lương")
+    )
+    name = models.CharField(_("Tên khấu trừ"), max_length=100)
+    amount = models.FloatField(_("Giá trị"), default=0.0)
+    is_percentage = models.BooleanField(_("Là phần trăm"), default=False)
+    value = models.DecimalField(
+        _("Số tiền"),
+        max_digits=12,
+        decimal_places=0,
+        default=0
+    )
 
-	class Meta:
-		verbose_name = 'Khấu trừ'
-		verbose_name_plural = 'Khấu trừ'
+    def __str__(self):
+        return f"{self.name} - {self.payroll_detail.employee.full_name}"
 
-	def __str__(self):
-		return f"{self.name} - {self.payroll_detail.employee.full_name}"
-
-	def save(self, *args, **kwargs):
-		if self.is_percentage:
-			self.value = (self.payroll_detail.gross_salary * self.amount / 100).quantize(Decimal('0'))
-		else:
-			self.value = self.amount
-		super().save(*args, **kwargs)
+    class Meta:
+        verbose_name = _("Khấu trừ lương")
+        verbose_name_plural = _("Khấu trừ lương")

@@ -73,9 +73,9 @@ class AttendanceSheetForm(forms.Form):
     name = forms.CharField(max_length=200, label="Tên bảng chấm công",
                           widget=forms.TextInput(attrs={'class': 'form-control'}))
     month = forms.ChoiceField(choices=[(i, i) for i in range(1, 13)], label="Tháng",
-                             widget=forms.Select(attrs={'class': 'form-select'}), null=True)
+                             widget=forms.Select(attrs={'class': 'form-select'}))
     year = forms.ChoiceField(choices=[(i, i) for i in range(2020, 2031)], label="Năm",
-                            widget=forms.Select(attrs={'class': 'form-select'}), null=True)
+                            widget=forms.Select(attrs={'class': 'form-select'}))
     positions = forms.ModelMultipleChoiceField(
         queryset=Position.objects.filter(is_active=True),
         label="Vị trí áp dụng",
@@ -161,6 +161,7 @@ class DailyAttendanceForm(forms.Form):
         initial=1,
         widget=forms.NumberInput(attrs={'class': 'form-control', 'step': '0.5', 'min': '0', 'max': '1'})
     )
+
 
 
 class TransferAttendanceForm(forms.Form):

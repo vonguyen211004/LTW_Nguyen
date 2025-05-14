@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load attendance_filters %}
+{% block title %}Chuyển tính lương{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Chuyển tính lương từ bảng chấm công</h1>
+        <a href="{% url 'attendance_summary_view' id=attendance_summary.id %}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Quay lại
+        </a>
+    </div>
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Thông tin bảng chấm công</h6>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <p><strong>Tên bảng chấm công:</strong> {{ attendance_summary.name }}</p>
+                </div>
+                <div class="col-md-4">
+                    <p><strong>Vị trí:</strong> {{ attendance_summary.position.name }}</p>
+                </div>
+                <div class="col-md-4">
+                    <p><strong>Tháng/Năm:</strong> {{ attendance_summary.month }}/{{ attendance_summary.year }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Dữ liệu chấm công</h6>
+        </div>
+        <div class="card-body">
+            {% if employee_data %}
+                <div class="table-responsive">
+                    <table class="table table-bordered" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Nhân viên</th>
+                                <th>Số công chuẩn</th>
+                                <th>Số công thực tế</th>
+                                <th>Nghỉ không lương</th>
+                                <th>Lương cơ bản</th>
+                                <th>Lương dự kiến</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for data in employee_data %}
+                                <tr>
+                                    <td>{{ data.employee.full_name }}</td>
+                                    <td>{{ data.standard_work_days }}</td>
+                                    <td>{{ data.actual_workdays }}</td>
+                                    <td>{{ data.unpaid_leave }}</td>
+
+                                    <td>{{ data.employee.basic_salary|floatformat:0 }}</td>
+
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="mt-4">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="alert alert-info">
+                            <p>Bạn có chắc chắn muốn chuyển dữ liệu từ bảng chấm công này sang tính lương không?</p>
+                            <p>Sau khi chuyển, bảng chấm công này sẽ được đánh dấu là đã chuyển tính lương và không thể chuyển lại.</p>
+                        </div>
+                        <button type="submit" name="confirm" class="btn btn-primary">
+                            <i class="fas fa-check"></i> Xác nhận chuyển tính lương
+                        </button>
+                        <a href="{% url 'attendance_summary_view' id=attendance_summary.id %}" class="btn btn-secondary">
+                            <i class="fas fa-times"></i> Hủy
+                        </a>
+                    </form>
+                </div>
+            {% else %}
+                <div class="alert alert-warning">
+                    <p>Không có dữ liệu chấm công cho bảng chấm công này hoặc có lỗi xảy ra khi lấy dữ liệu.</p>
+                    <p>Vui lòng kiểm tra lại bảng chấm công và thử lại sau.</p>
+                </div>
+                <a href="{% url 'attendance_summary_view' id=attendance_summary.id %}" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Quay lại
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Thêm filter để nhân hai số
+    django.jQuery.expr[':'].multiply = function(obj, index, meta, stack) {
+        return obj * meta[3];
+    };
+</script>
+{% endblock %}

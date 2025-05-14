@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load humanize %}
-
+{% load payroll_filters %}
 {% block title %}Chi tiết lương nhân viên - Ms.Vy English HR Management{% endblock %}
 
 {% block content %}
@@ -69,10 +69,6 @@
                     <span class="fw-medium">{{ detail.unpaid_leave }} ngày</span>
                 </div>
                 <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
-                    <span class="text-muted">Tỷ lệ hưởng lương</span>
-                    <span class="fw-medium">{{ detail.attendance_ratio|floatformat:2 }}</span>
-                </div>
-                <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
                     <span class="text-muted fw-medium">Lương theo ngày công</span>
                     <span class="fw-medium">{{ detail.gross_salary|floatformat:0|intcomma }} VNĐ</span>
                 </div>
@@ -107,41 +103,22 @@
                 </div>
                 {% endif %}
 
-                <!-- Khen thưởng -->
-                {% if detail.reward_amount > 0 %}
-                <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
-                    <span class="text-muted">Tiền thưởng</span>
-                    <span class="fw-medium text-success">{{ detail.reward_amount|floatformat:0|intcomma }} VNĐ</span>
-                </div>
-                {% endif %}
 
                 <!-- Tổng thu nhập -->
-                <div class="d-flex justify-content-between align-items-center py-2 border-bottom bg-light">
-                    <span class="text-dark fw-medium">Tổng thu nhập</span>
-                    <span class="fw-bold">
-                        {% with total_allowances=0 %}
-                            {% for allowance in allowances %}
-                                {% with total_allowances=total_allowances|add:allowance.value %}{% endwith %}
-                            {% endfor %}
-                            {{ detail.gross_salary|add:total_allowances|add:detail.reward_amount|floatformat:0|intcomma }} VNĐ
-                        {% endwith %}
-                    </span>
-                </div>
-
-                <!-- Thuế TNCN -->
-                <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
-                    <span class="text-muted">Thuế TNCN</span>
-                    <span class="fw-medium text-danger">-{{ detail.income_tax|floatformat:0|intcomma }} VNĐ</span>
-                </div>
-
-                <!-- Kỷ luật -->
-                {% if detail.discipline_amount > 0 %}
-                <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
-                    <span class="text-muted">Tiền phạt kỷ luật</span>
-                    <span class="fw-medium text-danger">-{{ detail.discipline_amount|floatformat:0|intcomma }} VNĐ</span>
-                </div>
-                {% endif %}
-
+<div class="d-flex justify-content-between align-items-center py-2 border-bottom bg-light">
+    <span class="text-dark fw-medium">Tổng thu nhập</span>
+    <span class="fw-bold">
+        {% with total_allowances=0 %}
+            {% for allowance in allowances %}
+                {% with total_allowances=total_allowances|add:allowance.value %}
+                {% endwith %}
+            {% endfor %}
+            {% with total_income=detail.gross_salary|add:total_allowances %}
+                {{ total_income|floatformat:0|intcomma }} VNĐ
+            {% endwith %}
+        {% endwith %}
+    </span>
+</div>
                 <!-- Khấu trừ -->
                 {% if deductions %}
                 <div class="py-2">
@@ -158,16 +135,13 @@
                 </div>
                 {% endif %}
 
-                <!-- Tổng khấu trừ -->
-                <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
-                    <span class="text-muted fw-medium">Tổng khấu trừ</span>
-                    <span class="fw-medium text-danger">-{{ detail.income_tax|add:detail.discipline_amount|add:detail.deduction_amount|floatformat:0|intcomma }} VNĐ</span>
-                </div>
+
 
                 <!-- Thực lĩnh -->
                 <div class="d-flex justify-content-between align-items-center py-3 bg-primary bg-opacity-10 rounded px-3 mt-2">
-                    <span class="text-primary fw-medium">Thực lĩnh</span>
-                    <span class="fw-bold text-primary">{{ detail.net_salary|floatformat:0|intcomma }} VNĐ</span>
+                    <span class="fw-medium" style="color: red;">Thực lĩnh</span>
+                    <span class="fw-bold " style="color: red;">{{ detail.net_salary|floatformat:0|intcomma }} VNĐ</span>
+
                 </div>
             </div>
         </div>
@@ -184,36 +158,8 @@
             <div class="col-md-6">
                 <table class="table">
                     <tr>
-                        <th style="width: 250px;">Tổng thu nhập:</th>
-                        <td>{{ detail.gross_salary|add:detail.reward_amount|floatformat:0|intcomma }} VNĐ</td>
-                    </tr>
-                    <tr>
                         <th>Giảm trừ gia cảnh bản thân:</th>
                         <td>11,000,000 VNĐ</td>
-                    </tr>
-                    <tr>
-                        <th>Số người phụ thuộc:</th>
-                        <td>{{ detail.employee.dependents }} người</td>
-                    </tr>
-                    <tr>
-                        <th>Giảm trừ người phụ thuộc:</th>
-                        <td>{{ detail.employee.dependents|multiply:4400000|floatformat:0|intcomma }} VNĐ</td>
-                    </tr>
-                </table>
-            </div>
-            <div class="col-md-6">
-                <table class="table">
-                    <tr>
-                        <th style="width: 250px;">Thu nhập tính thuế:</th>
-                        <td>{{ detail.taxable_income|floatformat:0|intcomma }} VNĐ</td>
-                    </tr>
-                    <tr>
-                        <th>Thuế suất áp dụng:</th>
-                        <td>Biểu thuế lũy tiến từng phần</td>
-                    </tr>
-                    <tr class="table-primary">
-                        <th>Thuế TNCN phải nộp:</th>
-                        <td>{{ detail.income_tax|floatformat:0|intcomma }} VNĐ</td>
                     </tr>
                 </table>
             </div>
@@ -221,17 +167,7 @@
     </div>
 </div>
 
-<!-- Ghi chú -->
-{% if detail.note %}
-<div class="card">
-    <div class="card-header">
-        <h5 class="card-title mb-0">Ghi chú</h5>
-    </div>
-    <div class="card-body">
-        <p>{{ detail.note }}</p>
-    </div>
-</div>
-{% endif %}
+
 {% endblock %}
 
 {% block extra_js %}

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Position, Employee, Dependent, Discipline, Reward
+from .models import Position, Employee
 
 
 @admin.register(Position)
@@ -29,33 +29,9 @@ class EmployeeAdmin(admin.ModelAdmin):
 		('Thông tin lương', {
 			'fields': ('basic_salary',)
 		}),
-		('Thông tin thuế', {
-			'fields': ('tax_code', 'tax_exemption', 'dependents')
-		}),
 	)
 
 	def full_name(self, obj):
 		return obj.full_name
 
 	full_name.short_description = 'Họ và tên'
-
-
-@admin.register(Dependent)
-class DependentAdmin(admin.ModelAdmin):
-	list_display = ('full_name', 'employee', 'relationship', 'date_of_birth', 'is_active')
-	list_filter = ('relationship', 'is_active')
-	search_fields = ('full_name', 'employee__first_name', 'employee__last_name')
-
-
-@admin.register(Discipline)
-class DisciplineAdmin(admin.ModelAdmin):
-	list_display = ('employee', 'date', 'discipline_type', 'amount', 'created_by')
-	list_filter = ('discipline_type', 'date')
-	search_fields = ('employee__first_name', 'employee__last_name', 'note')
-
-
-@admin.register(Reward)
-class RewardAdmin(admin.ModelAdmin):
-	list_display = ('employee', 'date', 'reward_type', 'amount', 'created_by')
-	list_filter = ('reward_type', 'date')
-	search_fields = ('employee__first_name', 'employee__last_name', 'note')

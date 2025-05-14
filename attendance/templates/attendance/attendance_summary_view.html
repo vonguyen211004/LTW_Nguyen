@@ -40,14 +40,14 @@
                 <i class="bi bi-arrow-left me-1"></i> Quay lại
             </a>
             {% if not attendance_summary.transferred %}
-            <a href="{% url 'transfer_to_payroll' summary_id=attendance_summary.id %}" class="btn btn-primary">
-                <i class="bi bi-arrow-right-circle me-1"></i> Chuyển tính lương
-            </a>
-            {% else %}
-            <button disabled class="btn btn-success">
-                <i class="bi bi-check-circle me-1"></i> Đã chuyển tính lương
-            </button>
-            {% endif %}
+<a href="{% url 'transfer_to_payroll' summary_id=attendance_summary.id %}" class="btn btn-primary">
+    <i class="bi bi-arrow-right-circle me-1"></i> Chuyển tính lương
+</a>
+{% else %}
+<button disabled class="btn btn-success">
+    <i class="bi bi-check-circle me-1"></i> Đã chuyển tính lương
+</button>
+{% endif %}
         </div>
     </div>
 
@@ -127,4 +127,21 @@
         </div>
     </div>
 </div>
+
+<!-- Thông báo đang xử lý -->
+<div id="loading-message">
+    <div class="d-flex align-items-center">
+        <div class="spinner-border me-2" role="status">
+            <span class="visually-hidden">Đang xử lý...</span>
+        </div>
+        <span>Đang chuyển dữ liệu sang tính lương...</span>
+    </div>
+</div>
+
+<!-- Container cho thông báo -->
+<div id="alert-container" style="position: fixed; top: 20px; right: 20px; z-index: 9999;"></div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/attendance.js' %}"></script>
 {% endblock %}

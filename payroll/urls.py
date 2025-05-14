@@ -3,11 +3,21 @@ from . import views
 
 urlpatterns = [
     path('', views.payroll_list, name='payroll_list'),
+    path('create/', views.payroll_create, name='payroll_create'),
     path('<int:pk>/', views.payroll_detail, name='payroll_detail'),
-    path('employee/<int:payroll_id>/<int:detail_id>/', views.payroll_employee_detail, name='payroll_employee_detail'),
-    path('disable/<int:pk>/', views.disable_payroll, name='disable_payroll'),
-    path('activate/<int:pk>/', views.activate_payroll, name='activate_payroll'),
-    path('approve/<int:pk>/', views.approve_payroll, name='approve_payroll'),
-    path('mark-as-paid/<int:pk>/', views.mark_as_paid, name='mark_as_paid'),
-    path('export-excel/<int:pk>/', views.export_payroll_excel, name='export_payroll_excel'),
+    path('<int:pk>/update/', views.payroll_update, name='payroll_update'),
+    path('<int:pk>/activate/', views.activate_payroll, name='activate_payroll'),
+    path('<int:pk>/disable/', views.disable_payroll, name='disable_payroll'),
+    path('<int:pk>/export/', views.export_payroll_excel, name='export_payroll_excel'),
+
+    path('<int:payroll_id>/detail/<int:detail_id>/', views.payroll_employee_detail, name='payroll_employee_detail'),
+    path('calculate/', views.calculate_payroll, name='calculate_payroll'),
+
+    path('<int:pk>/export/', views.export_payroll, name='export_payroll'),
+
+# Thêm URL cho chức năng chuyển tính lương từ bảng chấm công
+    path('transfer/<int:attendance_summary_id>/', views.transfer_to_payroll, name='transfer_to_payroll'),
+    # Thêm URL cho chức năng chuyển tính lương từ bảng chấm công
+    path('transfer/<int:attendance_summary_id>/', views.transfer_to_payroll, name='transfer_to_payroll'),
+
 ]
